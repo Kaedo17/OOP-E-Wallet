@@ -32,7 +32,7 @@ public class Auth {
 
     public final void setUsername(String username) {
         this.username = username;
-    }
+    } 
 
     public final void setPin(int pin) {
         this.pin = pin;
