@@ -4,6 +4,15 @@ public class SignIn {
   private String newUsrName;
   private int newPass;
 
+  public class SignInBanner extends Auth.Banner {
+    public static void signInBannerShow() {
+      System.out.println("O---------------------------------------O");
+      System.out.println("|             S I G N   I N             |");
+      System.out.println("O---------------------------------------O");
+    }
+
+  }
+
   public SignIn(String newUsrName, int newPass) {
     setNewUsername(newUsrName);
     setNewPass(newPass);
@@ -32,25 +41,41 @@ public class SignIn {
     Scanner input = new Scanner(System.in);
     boolean isSignedIn = false;
 
-    while (!isSignedIn) {
+  outer: while (!isSignedIn) {
       try {
+        Auth.clearConsole();
         String inputUsername;
         int inputPass = 0;
 
-        System.out.println("Sign In");
+        SignInBanner.signInBannerShow();
+        SignInBanner.bannerSingleOpt();
         System.out.println();
 
         System.out.print("Enter Username: ");
         inputUsername = input.nextLine();
 
-        System.out.println("Note: 4 digit positive integers");
-        System.out.println("Enter Pin: ");
-        
+        if ("1".equals(inputUsername)) {
+          return;
+        }
 
         boolean validPin = false;
 
-        while (!validPin) {
+        do {
+          Auth.clearConsole();
+          SignInBanner.signInBannerShow();
+          SignInBanner.bannerDoubleOpt();
+
+          System.out.println("Note: 4 digit positive integers");
+          System.out.print("Enter Pin: ");
+
           String pinStr = input.nextLine().trim();
+
+          if ("1".equals(pinStr)) {
+            // Go back to username prompt without recursion
+            continue outer;
+          } else if ("2".equals(pinStr)) {
+            return;
+          }
           // Validate that the input is exactly 4 digits
           if (!pinStr.matches("\\d{4}")) {
             System.err.println("Error: PIN must be exactly 4 digits (numbers only)!");
@@ -58,12 +83,12 @@ public class SignIn {
             Auth.clearConsole();
             System.out.println("Note: 4 digit positive integers");
             System.out.print("Enter pin again: ");
-            
+
           } else {
             inputPass = Integer.parseInt(pinStr);
             validPin = true;
-          } 
-        }
+          }
+        } while (!validPin);
 
         // After a valid PIN is entered, save and finish sign-in
         setNewUsername(inputUsername);
