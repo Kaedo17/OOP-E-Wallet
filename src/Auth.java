@@ -7,9 +7,9 @@ public class Auth {
         System.out.flush();
     }
 
-    public static void pause(Scanner scanner) {
+    public static void pause(Scanner input) {
         System.out.println("Press Enter to continue...");
-        scanner.nextLine();
+        input.nextLine();
     }
 
     private final String authUser = "admin";
@@ -43,13 +43,13 @@ public class Auth {
     }
 
     public void login() {
-        Scanner scanner = new Scanner(System.in);
+        Scanner input = new Scanner(System.in);
         boolean isLoggedIn = false;
 
         while (!isLoggedIn) {
             try {
                 System.out.print("Enter username: ");
-                String inputUsername = scanner.nextLine();
+                String inputUsername = input.nextLine();
                 System.out.print("Enter pin: ");
                 
                 int inputPin = 0;
@@ -57,11 +57,11 @@ public class Auth {
                 
                 while (!validPin) {
                     try {
-                        inputPin = Integer.parseInt(scanner.nextLine());
+                        inputPin = Integer.parseInt(input.nextLine());
                         validPin = true;
                     } catch (NumberFormatException e) {
                         System.out.println("Error: PIN must be a number!");
-                        pause(scanner);
+                        pause(input);
                         clearConsole();
                         System.out.print("Enter pin again: ");
                     }
@@ -73,21 +73,19 @@ public class Auth {
                 if (isAuthenticated()) {
                     System.out.println("Login successful!");
                     isLoggedIn = true;
-                    pause(scanner);
+                    pause(input);
                     clearConsole();
                 } else {
                     System.out.println("Invalid username or pin. Please try again.");
-                    pause(scanner);
+                    pause(input);
                     clearConsole();
                 }
             } catch (Exception e) {
                 System.out.println("Invalid input. Please try again.");
-                pause(scanner);
+                pause(input);
                 clearConsole();
             }
         }
-        scanner.close();
-        scanner.close();
     }
 
 }
