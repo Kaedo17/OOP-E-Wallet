@@ -27,34 +27,51 @@ public class SignIn {
 
   public void signIn() {
     Scanner scanner = new Scanner(System.in);
-    String inputUsername;
-    int inputPass;
+    boolean isSignedIn = false;
 
-    Auth myAuth = new Auth("",0);
-
-    System.out.println("Sign In");
-    System.out.println();
-
-    System.out.println("Enter Username: ");
-    inputUsername = scanner.nextLine();
-
-    System.out.println("Entern Pin: ");
-    System.out.println("Note: 4 digit positive integers");
-
-    boolean validPin = false;
-
-    while (!validPin) {
+    while(!isSignedIn) {
       try {
-        inputPass = Integer.parseInt(scanner.nextLine());
-        validPin = true;
-      } catch (NumberFormatException e) {
-        System.out.println("Error: Pin must be a number!");
-        Auth.pause(scanner);
-        Auth.clearConsole();
-        System.out.println("Enter pin again: ");
-        System.out.println("Note: 4 digit positive integers");
+        String inputUsername;
+        int inputPass;
+
+        Auth myAuth = new Auth("",0);
+
+        System.out.println("Sign In");
+        System.out.println();
+
+        System.out.print("Enter Username: ");
+        inputUsername = scanner.nextLine();
+
+      
+
+        System.out.println("Entern Pin: ");
+        System.out.print("Note: 4 digit positive integers");
+
+        boolean validPin = false;
+
+        while (!validPin) {
+          try {
+            if (inputPass > 9999 || inputPass < 0) {
+              System.err.println("Please enter 4 digit positive integers!");
+            } else {
+              inputPass = Integer.parseInt(scanner.nextLine());
+              validPin = true;
+
+            }
+
+          } catch (NumberFormatException e) {
+            System.out.println("Error: Pin must be a number!");
+            Auth.pause(scanner);
+            Auth.clearConsole();
+            System.out.println("Enter pin again: ");
+            System.out.print("Note: 4 digit positive integers");
+          }
+        }
+
+
+      } catch (Exception e) {
+        // TODO: handle exception
       }
-    }
   }
 }
 
