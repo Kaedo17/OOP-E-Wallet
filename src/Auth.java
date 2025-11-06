@@ -83,10 +83,18 @@ public class Auth {
                     Auth.LoginBanner.bannerSingleOpt();
 
                     System.out.print("Enter username: ");
-                    inputUsername = input.nextLine();
+                    inputUsername = input.nextLine().trim();
 
                     if ("1".equals(inputUsername)) {
                         return;
+                    }
+
+                    if (inputUsername.isEmpty()) {
+                        System.out.println("O------------------------------------------------O");
+                        System.err.println("Username cannot be empty. Please enter a username.");
+                        System.out.println("O------------------------------------------------O");
+                        Auth.pause(input);
+                        continue outer; // re-prompt username
                     }
 
                     Auth.clearConsole();
@@ -121,6 +129,8 @@ public class Auth {
                     isLoggedIn = true;
                     pause(input);
                     clearConsole();
+                    Dashboard dashboard = new Dashboard();
+                    dashboard.displayDashboard(input);
                 } else {
                     System.out.println("O---------------------------------------O");
                     System.out.println("Invalid username or pin. Please try again.");

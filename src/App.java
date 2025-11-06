@@ -13,33 +13,35 @@ public class App {
             System.out.println("2. Login");
             System.out.println("3. Logout/Exit");
             System.out.print("Please select an option: ");
-            int choice = input.nextInt();
+            // int choice = input.nextInt();
 
-            switch (choice) {
-                case 1 -> {
-                    Auth.clearConsole();
-                    SignIn signin = new SignIn("", 0);
-                    signin.signIn();
-                    Auth.clearConsole();
-                }
-                case 2 -> {
-                    Auth.clearConsole();
-                    Auth auth = new Auth("", 0);
-                    auth.login();
-                    Auth.clearConsole();
+            String choice = input.nextLine().trim();
 
-                }
-                case 3 -> {
-                    System.out.println("O---------------------------------------O");
-                    System.out.println("Exiting the application. Goodbye!");
-                    Auth.pause(input);
-                    if(input.nextLine()!=null){
-                        Auth.clearConsole();
-                        exit = true;
-                    }
-                }
-                default -> System.out.println("Invalid option selected.");
+            if ("1".equals(choice)) {
+                Auth.clearConsole();
+                SignIn signin = new SignIn("", 0);
+                signin.signIn();
+                Auth.clearConsole();
+            } else if ("2".equals(choice)) {
+                Auth.clearConsole();
+                Auth auth = new Auth("", 0);
+                auth.login();
+                Auth.clearConsole();
+            } else if ("3".equals(choice)) {
+                System.out.println("O---------------------------------------O");
+                System.out.println("Exiting the application. Goodbye!");
+                System.out.println("O---------------------------------------O");
+                Auth.pause(input);
+                    Auth.clearConsole();
+                    exit = true;
+            } else {
+                System.out.println("O---------------------------------------O");
+                System.out.println("Invalid option selected.");
+                System.out.println("O---------------------------------------O");
+                Auth.pause(input);
+                Auth.clearConsole();
             }
+
         } while (!exit);
         input.close();
         input.close();

@@ -41,22 +41,35 @@ public class SignIn {
     Scanner input = new Scanner(System.in);
     boolean isSignedIn = false;
 
-  outer: while (!isSignedIn) {
+    outer: while (!isSignedIn) {
       try {
         Auth.clearConsole();
         String inputUsername;
         int inputPass = 0;
+        boolean isValidUsername;
 
-        SignInBanner.signInBannerShow();
-        SignInBanner.bannerSingleOpt();
-        System.out.println();
+        do {
+          SignInBanner.signInBannerShow();
+          SignInBanner.bannerSingleOpt();
+          System.out.println();
 
-        System.out.print("Enter Username: ");
-        inputUsername = input.nextLine();
+          System.out.print("Enter Username: ");
+          inputUsername = input.nextLine().trim();
 
-        if ("1".equals(inputUsername)) {
-          return;
-        }
+          if ("1".equals(inputUsername)) {
+            return;
+          }else if (inputUsername.isEmpty()) {
+            System.out.println("O------------------------------------------------O");
+            System.err.println("Username cannot be empty. Please enter a username.");
+            System.out.println("O------------------------------------------------O");
+            Auth.pause(input);
+            continue outer; // re-prompt username
+          } else {
+            isValidUsername = true;
+          }
+
+          
+        } while (!isValidUsername);
 
         boolean validPin = false;
 
@@ -78,7 +91,9 @@ public class SignIn {
           }
           // Validate that the input is exactly 4 digits
           if (!pinStr.matches("\\d{4}")) {
+            System.out.println("O-------------------------------------------------O");
             System.err.println("Error: PIN must be exactly 4 digits (numbers only)!");
+            System.out.println("O-------------------------------------------------O");
             Auth.pause(input);
             Auth.clearConsole();
             System.out.println("Note: 4 digit positive integers");
@@ -93,13 +108,17 @@ public class SignIn {
         // After a valid PIN is entered, save and finish sign-in
         setNewUsername(inputUsername);
         setNewPass(inputPass);
+        System.out.println("O---------------------------------------O");
         System.out.println("Sign in successful!");
+        System.out.println("O---------------------------------------O");
         isSignedIn = true;
         Auth.pause(input);
         Auth.clearConsole();
 
       } catch (NumberFormatException e) {
+        System.out.println("O---------------------------------------O");
         System.err.println("Unexpected error: " + e.getMessage());
+        System.out.println("O---------------------------------------O");
         Auth.pause(input);
         Auth.clearConsole();
         // continue the loop and allow the user to try again
