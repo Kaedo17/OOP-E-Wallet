@@ -1,4 +1,10 @@
+import java.io.Reader;
 import java.util.Scanner;
+import java.nio.file.*;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 public class Auth {
 
@@ -38,8 +44,8 @@ public class Auth {
         }
     }
 
-    private final String authUser = "admin";
-    private final int authPin = 1234;
+//    private final String authUser = "admin";
+//    private final int authPin = 1234;
     private String username;
     private int pin;
 
@@ -62,10 +68,6 @@ public class Auth {
 
     public final void setPin(int pin) {
         this.pin = pin;
-    }
-
-    public boolean isAuthenticated() {
-        return authUser.equals(username) && authPin == pin;
     }
 
     public void login() {
@@ -123,7 +125,7 @@ public class Auth {
                 setUsername(inputUsername);
                 setPin(inputPin);
 
-                if (isAuthenticated()) {
+                if (userValidator()) {
                     System.out.println("O---------------------------------------O");
                     System.out.println("Login successful!");
                     isLoggedIn = true;
@@ -144,6 +146,36 @@ public class Auth {
                 clearConsole();
             }
         }
+    }
+
+    public boolean userValidator() {
+        Path file = Paths.get("database").resolve("user.json");
+        if (!Files.exists(file))
+            return false;
+
+        try (Reader r = Files.newBufferedReader(file)) {
+            JsonElement root = JsonParser.parseReader(r);
+            JsonArray users = root.isJsonArray() ? root.getAsJsonArray() : new JsonArray();
+
+            for (JsonElement e : users) {
+                JsonObject u = e.getAsJsonObject();
+                if (!u.has("username") || !u.has("pin"))
+                    continue;
+
+                String storedUser = u.get("username").getAsString();
+                String storedPin = u.get("pin").getAsString(); // <-- string
+
+                // The user typed the PIN as a string (e.g. "0000")
+                String enteredPin = String.format("%04d", getPin());
+
+                if (storedUser.equals(getUsername()) && storedPin.equals(enteredPin)) {
+                    return true;
+                }
+            }
+        } catch (Exception ex) {
+            return false;
+        }
+        return false;
     }
 
 }

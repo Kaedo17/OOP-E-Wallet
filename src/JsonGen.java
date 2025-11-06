@@ -33,7 +33,7 @@ public class JsonGen {
         JsonArray users;
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         int nextId = 1;
-        
+
         try (Reader reader = new FileReader("database/user.json")) {
 
             users = gson.fromJson(reader, JsonArray.class);
@@ -50,11 +50,12 @@ public class JsonGen {
         JsonObject newUser = new JsonObject();
         newUser.addProperty("id", nextId);
         newUser.addProperty("username", getUsername());
-            // store PIN as a zero-padded 4-digit string so leading zeros are preserved
-            newUser.addProperty("pin", String.format("%04d", getPin()));
+        // store PIN as a zero-padded 4-digit string so leading zeros are preserved
+        String pinStr = String.format("%04d", pin);
+        newUser.addProperty("pin", pinStr);
         users.add(newUser);
 
-        try(FileWriter writer = new FileWriter("database/user.json")) {
+        try (FileWriter writer = new FileWriter("database/user.json")) {
             gson.toJson(users, writer);
             writer.flush();
         } catch (Exception e) {
@@ -63,8 +64,7 @@ public class JsonGen {
     }
 
     public void readJson() {
-        
-        
+
     }
 
 }
