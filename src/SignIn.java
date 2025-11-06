@@ -4,7 +4,7 @@ public class SignIn {
   private String newUsrName;
   private int newPass;
 
-  public class SignInBanner extends Auth.Banner {
+  public static class SignInBanner extends Auth.Banner {
     public static void signInBannerShow() {
       System.out.println("O---------------------------------------O");
       System.out.println("|             S I G N   I N             |");
