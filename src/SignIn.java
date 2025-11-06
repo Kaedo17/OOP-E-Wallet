@@ -3,6 +3,7 @@ import java.util.Scanner;
 public class SignIn {
   private String newUsrName;
   private int newPass;
+  private JsonGen jsonGen;
 
   public static class SignInBanner extends Auth.Banner {
     public static void signInBannerShow() {
@@ -58,7 +59,7 @@ public class SignIn {
 
           if ("1".equals(inputUsername)) {
             return;
-          }else if (inputUsername.isEmpty()) {
+          } else if (inputUsername.isEmpty()) {
             System.out.println("O------------------------------------------------O");
             System.err.println("Username cannot be empty. Please enter a username.");
             System.out.println("O------------------------------------------------O");
@@ -68,7 +69,6 @@ public class SignIn {
             isValidUsername = true;
           }
 
-          
         } while (!isValidUsername);
 
         boolean validPin = false;
@@ -108,6 +108,18 @@ public class SignIn {
         // After a valid PIN is entered, save and finish sign-in
         setNewUsername(inputUsername);
         setNewPass(inputPass);
+
+        // Persist new user to JSON using a single JsonGen instance
+        if (this.jsonGen == null) {
+          this.jsonGen = new JsonGen(inputUsername, inputPass);
+          // persist first user
+          this.jsonGen.updateJson();
+        } else {
+          this.jsonGen.setUsername(inputUsername);
+          this.jsonGen.setPin(inputPass);
+          this.jsonGen.updateJson();
+        }
+
         System.out.println("O---------------------------------------O");
         System.out.println("Sign in successful!");
         System.out.println("O---------------------------------------O");

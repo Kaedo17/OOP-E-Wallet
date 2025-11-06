@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "username": "nibba",
+    "pin": 5678
+  },
+  {
+    "id": 2,
+    "username": "ulol",
+    "pin": 9999
+  },
+  {
+    "id": 3,
+    "username": "bading",
+    "pin": 0
+  },
+  {
+    "id": 4,
+    "username": "another0",
+    "pin": "0000"
+  }
+]
