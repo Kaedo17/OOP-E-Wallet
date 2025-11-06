@@ -6,7 +6,9 @@ public class App {
         Scanner input = new Scanner(System.in);
         boolean exit = false;
         do {
-            System.out.println("Welcome to E-Wallet Control Panel");
+            System.out.println("O---------------------------------------O");
+            System.out.println("|              E - C A S H              |");
+            System.out.println("O---------------------------------------O");
             System.out.println("1. Sign In");
             System.out.println("2. Login");
             System.out.println("3. Logout/Exit");
