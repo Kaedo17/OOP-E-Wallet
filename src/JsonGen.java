@@ -1,6 +1,9 @@
 import com.google.gson.*;
 import java.io.*;
-import java.util.*;
+//import java.util.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class JsonGen {
 
@@ -63,8 +66,30 @@ public class JsonGen {
         }
     }
 
-    public void readJson() {
+    public boolean userChecker() {
+        Path file = Paths.get("database").resolve("user.json");
+        if (!Files.exists(file))
+            return false;
 
+        try (Reader r = Files.newBufferedReader(file)) {
+            JsonElement root = JsonParser.parseReader(r);
+            JsonArray users = root.isJsonArray() ? root.getAsJsonArray() : new JsonArray();
+
+            for (JsonElement e : users) {
+                JsonObject u = e.getAsJsonObject();
+                if (!u.has("username") || !u.has("pin"))
+                    continue;
+
+                String storedUser = u.get("username").getAsString();
+
+                if (storedUser.equals(getUsername())) {
+                    return true;
+                }
+            }
+        } catch (Exception ex) {
+            return false;
+        }
+        return false;
     }
 
 }

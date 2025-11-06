@@ -56,6 +56,7 @@ public class SignIn {
 
           System.out.print("Enter Username: ");
           inputUsername = input.nextLine().trim();
+          JsonGen checker = new JsonGen(inputUsername, 0);
 
           if ("1".equals(inputUsername)) {
             return;
@@ -63,6 +64,12 @@ public class SignIn {
             System.out.println("O------------------------------------------------O");
             System.err.println("Username cannot be empty. Please enter a username.");
             System.out.println("O------------------------------------------------O");
+            Auth.pause(input);
+            continue outer; // re-prompt username
+          } else if (checker.userChecker()) {
+            System.out.println("O----------------------------------------------------------O");
+            System.err.println("Username already exists. Please choose a different username.");
+            System.out.println("O----------------------------------------------------------O");
             Auth.pause(input);
             continue outer; // re-prompt username
           } else {

@@ -23,5 +23,10 @@
     "id": 5,
     "username": "pot",
     "pin": "1111"
+  },
+  {
+    "id": 6,
+    "username": "pota",
+    "pin": "5432"
   }
 ]
