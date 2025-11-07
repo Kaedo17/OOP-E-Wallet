@@ -7,6 +7,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 public class Auth {
+    Banners loginBanner = new Banners();
 
     public static void clearConsole() {
         System.out.print("\033[H\033[2J");
@@ -18,34 +19,8 @@ public class Auth {
         input.nextLine();
     }
 
-    public static class Banner {
-        public static void emptyBannerShow() {
-            System.out.println("O---------------------------------------O");
-            System.out.println("|                                       |");
-            System.out.println("O---------------------------------------O");
-        }
-
-        public static void bannerSingleOpt() {
-            System.out.println("|               [1] Back                |");
-            System.out.println("O---------------------------------------O");
-        }
-
-        public static void bannerDoubleOpt() {
-            System.out.println("|           [1] Back [2] Exit           |");
-            System.out.println("O---------------------------------------O");
-        }
-    }
-
-    public static class LoginBanner extends Auth.Banner {
-        public static void loginBannerShow() {
-            System.out.println("O---------------------------------------O");
-            System.out.println("|              L O G I N                |");
-            System.out.println("O---------------------------------------O");
-        }
-    }
-
-//    private final String authUser = "admin";
-//    private final int authPin = 1234;
+    // private final String authUser = "admin";
+    // private final int authPin = 1234;
     private String username;
     private int pin;
 
@@ -81,8 +56,8 @@ public class Auth {
                 String inputUsername;
                 do {
                     Auth.clearConsole();
-                    Auth.LoginBanner.loginBannerShow();
-                    Auth.LoginBanner.bannerSingleOpt();
+                    loginBanner.new LoginBanner().bannerShow();
+                    loginBanner.new LoginBanner().bannerSingleOpt();
 
                     System.out.print("Enter username: ");
                     inputUsername = input.nextLine().trim();
@@ -100,8 +75,8 @@ public class Auth {
                     }
 
                     Auth.clearConsole();
-                    Auth.LoginBanner.loginBannerShow();
-                    Auth.LoginBanner.bannerDoubleOpt();
+                    loginBanner.new LoginBanner().bannerShow();
+                    loginBanner.new LoginBanner().bannerDoubleOpt();
                     System.out.print("Enter pin: ");
 
                     try {
@@ -115,9 +90,10 @@ public class Auth {
                     } catch (NumberFormatException e) {
                         System.out.println("O---------------------------------------O");
                         System.out.println("Error: PIN must be a number!");
+                        System.out.println("O---------------------------------------O");
                         pause(input);
                         clearConsole();
-                        Auth.LoginBanner.loginBannerShow();
+                        loginBanner.new LoginBanner().bannerShow();
                         System.out.print("Enter pin again: ");
                     }
                 } while (!validPin);
@@ -128,6 +104,7 @@ public class Auth {
                 if (userValidator()) {
                     System.out.println("O---------------------------------------O");
                     System.out.println("Login successful!");
+                    System.out.println("O---------------------------------------O");
                     isLoggedIn = true;
                     pause(input);
                     clearConsole();
@@ -136,12 +113,14 @@ public class Auth {
                 } else {
                     System.out.println("O---------------------------------------O");
                     System.out.println("Invalid username or pin. Please try again.");
+                    System.out.println("O---------------------------------------O");
                     pause(input);
                     clearConsole();
                 }
             } catch (Exception e) {
                 System.out.println("O---------------------------------------O");
                 System.out.println("Invalid input. Please try again.");
+                System.out.println("O---------------------------------------O");
                 pause(input);
                 clearConsole();
             }

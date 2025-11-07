@@ -1,18 +1,10 @@
 import java.util.Scanner;
 
 public class SignIn {
+  Banners signBanner = new Banners();
   private String newUsrName;
   private int newPass;
   private JsonGen jsonGen;
-
-  public static class SignInBanner extends Auth.Banner {
-    public static void signInBannerShow() {
-      System.out.println("O---------------------------------------O");
-      System.out.println("|             S I G N   I N             |");
-      System.out.println("O---------------------------------------O");
-    }
-
-  }
 
   public SignIn(String newUsrName, int newPass) {
     setNewUsername(newUsrName);
@@ -50,8 +42,8 @@ public class SignIn {
         boolean isValidUsername;
 
         do {
-          SignInBanner.signInBannerShow();
-          SignInBanner.bannerSingleOpt();
+          signBanner.new SignInBanner().bannerShow();
+          signBanner.new SignInBanner().bannerSingleOpt();
           System.out.println();
 
           System.out.print("Enter Username: ");
@@ -82,8 +74,8 @@ public class SignIn {
 
         do {
           Auth.clearConsole();
-          SignInBanner.signInBannerShow();
-          SignInBanner.bannerDoubleOpt();
+          signBanner.new SignInBanner().bannerShow();
+          signBanner.new SignInBanner().bannerDoubleOpt();
 
           System.out.println("Note: 4 digit positive integers");
           System.out.print("Enter Pin: ");

@@ -1,32 +1,8 @@
 [
   {
     "id": 1,
-    "username": "nge",
-    "pin": 5555
-  },
-  {
-    "id": 2,
-    "username": "ne",
-    "pin": 0
-  },
-  {
-    "id": 3,
-    "username": "hemp",
-    "pin": "0000"
-  },
-  {
-    "id": 4,
-    "username": "pot",
-    "pin": "5673"
-  },
-  {
-    "id": 5,
-    "username": "pot",
-    "pin": "1111"
-  },
-  {
-    "id": 6,
-    "username": "pota",
-    "pin": "5432"
+    "username": "Rasol",
+    "pin": "5555",
+    "balance": 0
   }
 ]

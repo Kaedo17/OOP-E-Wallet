@@ -56,6 +56,7 @@ public class JsonGen {
         // store PIN as a zero-padded 4-digit string so leading zeros are preserved
         String pinStr = String.format("%04d", pin);
         newUser.addProperty("pin", pinStr);
+        newUser.addProperty("balance", 0);
         users.add(newUser);
 
         try (FileWriter writer = new FileWriter("database/user.json")) {

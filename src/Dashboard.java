@@ -1,20 +1,8 @@
 import java.util.Scanner;
 
 public class Dashboard {
-    public static class balanceBanner extends Auth.Banner {
-        public static void balanceBannerShow() {
-            System.out.println("O---------------------------------------O");
-            System.out.println("|             B A L A N C E             |");
-            System.out.println("O---------------------------------------O");
-            System.out.println("|                 $1000                 |");
-            System.out.println("O---------------------------------------O");
 
-        }
-    }
-
-    public void showBalance() {
-        balanceBanner.balanceBannerShow();
-    }
+    Banners balanceBanner = new Banners();
 
     /**
      * Interactive dashboard loop. Returns when the user chooses to logout/exit.
@@ -23,7 +11,7 @@ public class Dashboard {
         boolean logout = false;
         while (!logout) {
             Auth.clearConsole();
-            balanceBanner.balanceBannerShow();
+            balanceBanner.new BalanceBanner().bannerShow();
             System.out.println("1. Refresh balance");
             System.out.println("2. Logout");
             System.out.print("Select an option: ");
