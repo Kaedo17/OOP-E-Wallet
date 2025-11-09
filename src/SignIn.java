@@ -4,12 +4,6 @@ public class SignIn {
   Banners signBanner = new Banners();
   private JsonGen jsonGen;
 
-  public final void setNewPass(int newPass) {
-    if (newPass < 0 || newPass > 9999) {
-      throw new IllegalArgumentException("PIN must be a 4-digit number between 0000 and 9999");
-    }
-  }
-
   public void signIn() {
     Scanner input = new Scanner(System.in);
     boolean isSignedIn = false;
