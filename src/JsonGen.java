@@ -8,10 +8,12 @@ import java.nio.file.Paths;
 public class JsonGen {
 
     private String username;
+    private String realName;
     private int pin;
 
-    public JsonGen(String username, int pin) {
+    public JsonGen(String realName, String username, int pin) {
         setUsername(username);
+        setRealName(realName);
         setPin(pin);
 
     }
@@ -20,8 +22,16 @@ public class JsonGen {
         return username;
     }
 
+    public String getRealName() {
+        return realName;
+    }
+
     public int getPin() {
         return pin;
+    }
+
+    public final void setRealName(String realName) {
+        this.realName = realName;
     }
 
     public final void setUsername(String username) {
@@ -52,6 +62,7 @@ public class JsonGen {
 
         JsonObject newUser = new JsonObject();
         newUser.addProperty("id", nextId);
+        newUser.addProperty("Name", getRealName());
         newUser.addProperty("username", getUsername());
         // store PIN as a zero-padded 4-digit string so leading zeros are preserved
         String pinStr = String.format("%04d", pin);

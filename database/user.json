@@ -4,5 +4,12 @@
     "username": "Rasol",
     "pin": "5555",
     "balance": 0
+  },
+  {
+    "id": 2,
+    "Name": "Karlito",
+    "username": "wudahel",
+    "pin": "0000",
+    "balance": 0
   }
 ]

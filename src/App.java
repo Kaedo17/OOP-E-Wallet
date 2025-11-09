@@ -7,7 +7,7 @@ public class App {
         boolean exit = false;
         do {
             System.out.println("O---------------------------------------O");
-            System.out.println("|              E - C A S H              |");
+            System.out.println("|            O N L I - B A N K           |");
             System.out.println("O---------------------------------------O");
             System.out.println("1. Sign In");
             System.out.println("2. Login");
@@ -19,7 +19,7 @@ public class App {
 
             if ("1".equals(choice)) {
                 Auth.clearConsole();
-                SignIn signin = new SignIn("", 0);
+                SignIn signin = new SignIn();
                 signin.signIn();
                 Auth.clearConsole();
             } else if ("2".equals(choice)) {
