@@ -1,15 +1,16 @@
 [
   {
     "id": 1,
-    "username": "Rasol",
-    "pin": "5555",
-    "balance": 0
+    "Name": "Karl",
+    "username": "wudahel",
+    "pin": "0000",
+    "balance": 19350
   },
   {
     "id": 2,
-    "Name": "Karlito",
-    "username": "wudahel",
-    "pin": "0000",
+    "Name": "Kurt",
+    "username": "que",
+    "pin": "2323",
     "balance": 0
   }
 ]

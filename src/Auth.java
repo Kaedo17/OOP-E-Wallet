@@ -8,6 +8,8 @@ import com.google.gson.JsonParser;
 
 public class Auth {
     Banners loginBanner = new Banners();
+    private static String loggedInUsername;
+    private static int loggedInPin;
 
     public static void clearConsole() {
         System.out.print("\033[H\033[2J");
@@ -100,11 +102,15 @@ public class Auth {
 
                 setUsername(inputUsername);
                 setPin(inputPin);
+                BalanceManager balanceManager = new BalanceManager("", inputUsername, inputPin);
 
                 if (userValidator()) {
                     System.out.println("O---------------------------------------O");
                     System.out.println("Login successful!");
                     System.out.println("O---------------------------------------O");
+                    // Store the logged-in credentials
+                    loggedInUsername = getUsername();
+                    loggedInPin = getPin();
                     isLoggedIn = true;
                     pause(input);
                     clearConsole();
@@ -125,6 +131,7 @@ public class Auth {
                 clearConsole();
             }
         }
+
     }
 
     public boolean userValidator() {
@@ -155,6 +162,15 @@ public class Auth {
             return false;
         }
         return false;
+    }
+
+    // Add getters for the logged-in user
+    public static String getLoggedInUsername() {
+        return loggedInUsername;
+    }
+
+    public static int getLoggedInPin() {
+        return loggedInPin;
     }
 
 }

@@ -39,8 +39,6 @@ public class Banners {
             System.out.println("O---------------------------------------O");
             System.out.println("|             B A L A N C E             |");
             System.out.println("O---------------------------------------O");
-            System.out.println("|                 $1000                 |");
-            System.out.println("O---------------------------------------O");
 
         }
     }
