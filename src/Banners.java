@@ -41,6 +41,14 @@ public class Banners {
             System.out.println("O---------------------------------------O");
 
         }
+
+        public void balanceBannerOpts() {
+            System.out.println("1. Refresh balance");
+            System.out.println("2. Deposit");
+            System.out.println("3. Send/Transfer");
+            System.out.println("4. Logout");
+            System.out.println("O---------------------------------------O");
+        }
     }
 
     public void showLoginBanner() {

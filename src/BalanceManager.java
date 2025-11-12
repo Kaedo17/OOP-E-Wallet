@@ -1,3 +1,4 @@
+import java.io.FileWriter;
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -12,11 +13,13 @@ public class BalanceManager {
     private String balanceUsername;
     private String balanceRealName;
     private int balancePin;
+    private long balanceBalance;
 
     public BalanceManager(String balanceRealName, String balanceUsername, int balancePin) {
         setUsername(balanceUsername);
         setRealName(balanceRealName);
         setPin(balancePin);
+        setBalance(0);
 
     }
 
@@ -32,6 +35,10 @@ public class BalanceManager {
         return balancePin;
     }
 
+    public long getBalance() {
+        return balanceBalance;
+    }
+
     public final void setUsername(String balanceUsername) {
         this.balanceUsername = balanceUsername;
     }
@@ -42,6 +49,10 @@ public class BalanceManager {
 
     public final void setPin(int balancePin) {
         this.balancePin = balancePin;
+    }
+
+    public final void setBalance(long balanceBalance) {
+        this.balanceBalance = balanceBalance;
     }
 
     public boolean userChecker() {
@@ -99,6 +110,59 @@ public class BalanceManager {
                     System.out.println("O---------------------------------------O");
                     userFound = true;
                     break;
+                }
+            }
+
+            if (!userFound) {
+                System.out.println("User not found or invalid credentials.");
+                System.out.println("O---------------------------------------O");
+            }
+        } catch (Exception ex) {
+            System.out.println("O---------------------------------------O");
+            System.out.println("Error retrieving balance.");
+            System.out.println("O---------------------------------------O");
+        }
+
+    }
+
+    public void addBalance() {
+        Path file = Paths.get("database").resolve("user.json");
+        if (!Files.exists(file)) {
+            System.out.println("Database not found");
+            System.out.println("O---------------------------------------O");
+            return;
+        }
+        try (Reader r = Files.newBufferedReader(file)) {
+            JsonElement root = JsonParser.parseReader(r);
+            JsonArray users = root.isJsonArray() ? root.getAsJsonArray() : new JsonArray();
+
+            boolean userFound = false;
+
+            for (JsonElement e : users) {
+                JsonObject u = e.getAsJsonObject();
+                if (!u.has("username") || !u.has("pin") || !u.has("balance"))
+                    continue;
+
+                String storedUser = u.get("username").getAsString();
+
+                // Check if username AND pin match
+                if (storedUser.equals(getUsername())) {
+                    long currentBalance = u.get("balance").getAsLong();
+                    long newBalance = getBalance() + currentBalance;
+
+                    u.addProperty("balance", newBalance);
+                    System.out.println("O---------------------------------------O");
+                    userFound = true;
+                    break;
+                }
+            }
+
+            if (userFound) {
+                try (FileWriter writer = new FileWriter(file.toFile())) {
+                    new com.google.gson.GsonBuilder()
+                            .setPrettyPrinting()
+                            .create()
+                            .toJson(users, writer);
                 }
             }
 

@@ -3,11 +3,7 @@ import java.util.Scanner;
 public class Dashboard {
 
     Banners balanceBanner = new Banners();
-    // Auth auth = new Auth(null, 0);
 
-    /**
-     * Interactive dashboard loop. Returns when the user chooses to logout/exit.
-     */
     public void displayDashboard(Scanner input) {
         boolean logout = false;
         while (!logout) {
@@ -16,8 +12,7 @@ public class Dashboard {
             balanceBanner.new BalanceBanner().bannerShow();
             balanceManager.showBalance();
 
-            System.out.println("1. Refresh balance");
-            System.out.println("2. Logout");
+            balanceBanner.new BalanceBanner().balanceBannerOpts();
             System.out.print("Select an option: ");
             String choice = input.nextLine().trim();
             if (null == choice) {
@@ -30,6 +25,13 @@ public class Dashboard {
                     case "1":
                         break;
                     case "2":
+                        Deposit deposit = new Deposit();
+                        deposit.showDeposit(input);
+                        break;
+                    case "3":
+                        logout = true;
+                        break;
+                    case "4":
                         logout = true;
                         break;
                     default:
