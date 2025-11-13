@@ -14,13 +14,14 @@ public class BalanceManager {
     private String balanceRealName;
     private int balancePin;
     private long balanceBalance;
+    private long transferBalance;
 
     public BalanceManager(String balanceRealName, String balanceUsername, int balancePin) {
         setUsername(balanceUsername);
         setRealName(balanceRealName);
         setPin(balancePin);
         setBalance(0);
-
+        setTransfer(0);
     }
 
     public String getUsername() {
@@ -39,6 +40,10 @@ public class BalanceManager {
         return balanceBalance;
     }
 
+    public long getTransfer() {
+        return transferBalance;
+    }
+
     public final void setUsername(String balanceUsername) {
         this.balanceUsername = balanceUsername;
     }
@@ -53,6 +58,10 @@ public class BalanceManager {
 
     public final void setBalance(long balanceBalance) {
         this.balanceBalance = balanceBalance;
+    }
+
+    public final void setTransfer(long transferBalance) {
+        this.transferBalance = transferBalance;
     }
 
     public boolean userChecker() {
@@ -153,6 +162,68 @@ public class BalanceManager {
                     u.addProperty("balance", newBalance);
                     System.out.println("O---------------------------------------O");
                     userFound = true;
+                    break;
+                }
+            }
+
+            if (userFound) {
+                try (FileWriter writer = new FileWriter(file.toFile())) {
+                    new com.google.gson.GsonBuilder()
+                            .setPrettyPrinting()
+                            .create()
+                            .toJson(users, writer);
+                }
+            }
+
+            if (!userFound) {
+                System.out.println("User not found or invalid credentials.");
+                System.out.println("O---------------------------------------O");
+            }
+        } catch (Exception ex) {
+            System.out.println("O---------------------------------------O");
+            System.out.println("Error retrieving balance.");
+            System.out.println("O---------------------------------------O");
+        }
+
+    }
+
+    public void transferBalance() {
+        Path file = Paths.get("database").resolve("user.json");
+        if (!Files.exists(file)) {
+            System.out.println("Database not found");
+            System.out.println("O---------------------------------------O");
+            return;
+        }
+        try (Reader r = Files.newBufferedReader(file)) {
+            JsonElement root = JsonParser.parseReader(r);
+            JsonArray users = root.isJsonArray() ? root.getAsJsonArray() : new JsonArray();
+
+            boolean userFound = false;
+
+            for (JsonElement e : users) {
+                JsonObject u = e.getAsJsonObject();
+                if (!u.has("username") || !u.has("pin") || !u.has("balance"))
+                    continue;
+
+                String storedUser = u.get("username").getAsString();
+
+                // Check if username AND pin match
+                if (storedUser.equals(getUsername())) {
+                    long currentBalance = u.get("balance").getAsLong();
+                    
+
+                    if (currentBalance < getTransfer()) {
+                        System.out.println("O---------------------------------------O");
+                        System.out.println("Insufficient balance for transfer.");
+                        System.out.println("O---------------------------------------O");
+                        return;
+                    } else {
+                        long newBalance = currentBalance - getTransfer();
+                        u.addProperty("balance", newBalance);
+                        System.out.println("O---------------------------------------O");
+                        userFound = true;
+
+                    }
                     break;
                 }
             }

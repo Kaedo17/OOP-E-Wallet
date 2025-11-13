@@ -1,17 +1,17 @@
 import java.util.Scanner;
 
-public class Deposit {
+public class Transfer {
     String username = Auth.getLoggedInUsername();
     int pin = Auth.getLoggedInPin();
-    BalanceManager addBalance = new BalanceManager("", username, pin);
+    BalanceManager transferBalance = new BalanceManager("", username, pin);
     Banners balanceBanner = new Banners();
 
-    public void showDeposit(Scanner input) {
+    public void showTransfer(Scanner input) {
         boolean success = false;
         while (!success) {
             Auth.clearConsole();
             balanceBanner.new BalanceBanner().bannerShow();
-            addBalance.showBalance();
+            transferBalance.showBalance();
             balanceBanner.new BalanceBanner().bannerSingleOpt();
             System.out.print("Enter amount: ");
             String amount = input.nextLine().trim();
@@ -34,8 +34,8 @@ public class Deposit {
                     System.out.println("O---------------------------------------O");
                     Auth.pause(input);
                 } else {
-                    addBalance.setBalance((long) depositAmount);
-                    addBalance.addBalance();
+                    transferBalance.setTransfer((long) depositAmount);
+                    transferBalance.transferBalance();
                     success = true;
                 }
             } catch (NumberFormatException e) {

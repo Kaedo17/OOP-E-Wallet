@@ -21,8 +21,6 @@ public class Auth {
         input.nextLine();
     }
 
-    // private final String authUser = "admin";
-    // private final int authPin = 1234;
     private String username;
     private int pin;
 

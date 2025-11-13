@@ -29,7 +29,8 @@ public class Dashboard {
                         deposit.showDeposit(input);
                         break;
                     case "3":
-                        logout = true;
+                        Transfer transfer = new Transfer();
+                        transfer.showTransfer(input);
                         break;
                     case "4":
                         logout = true;

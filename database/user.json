@@ -11,6 +11,13 @@
     "Name": "Kurt",
     "username": "que",
     "pin": "2323",
-    "balance": 1000000100
+    "balance": 10
+  },
+  {
+    "id": 3,
+    "Name": "Frandy",
+    "username": "popo",
+    "pin": "1234",
+    "balance": 19
   }
 ]
