@@ -10,13 +10,13 @@ public class Deposit {
         boolean success = false;
         while (!success) {
             Auth.clearConsole();
-            balanceBanner.new BalanceBanner().bannerShow();
+            balanceBanner.new depositBanner().bannerShow();
             addBalance.showBalance();
-            balanceBanner.new BalanceBanner().bannerSingleOpt();
+            balanceBanner.new depositBanner().bannerSingleOpt();
             System.out.print("Enter amount: ");
             String amount = input.nextLine().trim();
 
-            if ("1".equals(amount)) {
+            if (":1".equals(amount)) {
                 return; // Go back to dashboard
             }
 

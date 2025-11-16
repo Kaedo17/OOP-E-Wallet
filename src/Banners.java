@@ -49,6 +49,33 @@ public class Banners {
             System.out.println("4. Logout");
             System.out.println("O---------------------------------------O");
         }
+
+    }
+
+    public class depositBanner extends Banner {
+        @Override
+        public void bannerShow() {
+            System.out.println("O---------------------------------------O");
+            System.out.println("|             D E P O S I T             |");
+            System.out.println("O---------------------------------------O");
+        }
+
+        @Override
+        public void bannerSingleOpt() {
+            System.out.println("|               [:1] Back               |");
+            System.out.println("O---------------------------------------O");
+        }
+    }
+
+    public class transferBanner extends depositBanner {
+        @Override
+        public void bannerShow() {
+            System.out.println("O---------------------------------------O");
+            System.out.println("|            T R A N S F E R            |");
+            System.out.println("O---------------------------------------O");
+        }
+
+        
     }
 
     public void showLoginBanner() {
@@ -63,6 +90,14 @@ public class Banners {
         new BalanceBanner().bannerShow();
     }
 
+    public void showDepositBanner() {
+        new depositBanner().bannerShow();
+    }
+
+    public void showTransferBanner() {
+        new transferBanner().bannerShow();
+    }
+
     public Banner getLoginBanner() {
         return new LoginBanner();
     }
@@ -73,5 +108,13 @@ public class Banners {
 
     public Banner getBalanceBanner() {
         return new BalanceBanner();
+    }
+
+    public Banner getDepositBanner() {
+        return new depositBanner();
+    }
+
+    public Banner getTransferBanner() {
+        return new transferBanner();
     }
 }

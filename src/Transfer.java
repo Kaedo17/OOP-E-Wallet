@@ -11,14 +11,13 @@ public class Transfer {
         boolean success = false;
         while (!success) {
             Auth.clearConsole();
-            balanceBanner.new BalanceBanner().bannerShow();
+            balanceBanner.new transferBanner().bannerShow();
             transferBalance.showBalance();
-            balanceBanner.new BalanceBanner().bannerSingleOpt();
+            balanceBanner.new transferBanner().bannerSingleOpt();
             System.out.print("Enter amount: ");
             String amount = input.nextLine().trim();
-            System.out.println(currentBalance.currentBalance());
 
-            if ("1".equals(amount)) {
+            if (":1".equals(amount)) {
                 return; // Go back to dashboard
             }
 

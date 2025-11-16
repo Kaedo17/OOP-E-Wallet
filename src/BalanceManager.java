@@ -114,7 +114,7 @@ public class BalanceManager {
 
                 // Check if username AND pin match
                 if (storedUser.equals(getUsername()) && storedPin.equals(enteredPin)) {
-                    int balance = u.get("balance").getAsInt();
+                    long balance = u.get("balance").getAsLong();
                     System.out.println("        Current Balance: $" + balance);
                     System.out.println("O---------------------------------------O");
                     userFound = true;
