@@ -147,7 +147,8 @@ public class Auth {
                     continue;
 
                 String storedUser = u.get("username").getAsString();
-                String storedPin = u.get("pin").getAsString(); // <-- string
+                String storedPin = u.get("pin").getAsString();
+                long storedBalance = u.get("balance").getAsLong();
 
                 // The user typed the PIN as a string (e.g. "0000")
                 String enteredPin = String.format("%04d", getPin());

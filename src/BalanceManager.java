@@ -196,9 +196,10 @@ public class BalanceManager {
         }
         try (Reader r = Files.newBufferedReader(file)) {
             JsonElement root = JsonParser.parseReader(r);
-            JsonArray users = root.isJsonArray() ? root.getAsJsonArray() : new JsonArray();
+            JsonArray users = root.getAsJsonArray();
 
             boolean userFound = false;
+            boolean hasSufficientBalance = false; // Add this flag
 
             for (JsonElement e : users) {
                 JsonObject u = e.getAsJsonObject();
@@ -207,28 +208,30 @@ public class BalanceManager {
 
                 String storedUser = u.get("username").getAsString();
 
-                // Check if username AND pin match
                 if (storedUser.equals(getUsername())) {
                     long currentBalance = u.get("balance").getAsLong();
-                    
+                    userFound = true;
 
-                    if (currentBalance < getTransfer()) {
+                    if (currentBalance < getTransfer()) { // Change > to <
                         System.out.println("O---------------------------------------O");
-                        System.out.println("Insufficient balance for transfer.");
+                        System.out.println("Insufficient balance for transfer!");
+                        System.out.println("Current balance: $" + currentBalance);
                         System.out.println("O---------------------------------------O");
-                        return;
+                        hasSufficientBalance = false;
                     } else {
                         long newBalance = currentBalance - getTransfer();
                         u.addProperty("balance", newBalance);
                         System.out.println("O---------------------------------------O");
-                        userFound = true;
-
+                        System.out.println("Transfer successful! New balance: $" + newBalance);
+                        System.out.println("O---------------------------------------O");
+                        hasSufficientBalance = true;
                     }
                     break;
                 }
             }
 
-            if (userFound) {
+            // Only write to file if transfer was successful
+            if (userFound && hasSufficientBalance) {
                 try (FileWriter writer = new FileWriter(file.toFile())) {
                     new com.google.gson.GsonBuilder()
                             .setPrettyPrinting()
@@ -243,9 +246,9 @@ public class BalanceManager {
             }
         } catch (Exception ex) {
             System.out.println("O---------------------------------------O");
-            System.out.println("Error retrieving balance.");
+            System.out.println("Error processing transfer.");
             System.out.println("O---------------------------------------O");
         }
-
     }
+
 }

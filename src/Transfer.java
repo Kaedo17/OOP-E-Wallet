@@ -4,6 +4,7 @@ public class Transfer {
     String username = Auth.getLoggedInUsername();
     int pin = Auth.getLoggedInPin();
     BalanceManager transferBalance = new BalanceManager("", username, pin);
+    CurrentBalance currentBalance = new CurrentBalance(username, pin);
     Banners balanceBanner = new Banners();
 
     public void showTransfer(Scanner input) {
@@ -15,6 +16,7 @@ public class Transfer {
             balanceBanner.new BalanceBanner().bannerSingleOpt();
             System.out.print("Enter amount: ");
             String amount = input.nextLine().trim();
+            System.out.println(currentBalance.currentBalance());
 
             if ("1".equals(amount)) {
                 return; // Go back to dashboard
@@ -28,6 +30,12 @@ public class Transfer {
                     System.out.println("O---------------------------------------O");
                     Auth.pause(input);
 
+                } else if (currentBalance.currentBalance() < depositAmount) {
+                    System.out.println("O---------------------------------------O");
+                    System.err.println("Insufficient Balance!");
+                    System.out.println("Current balance: $" + currentBalance.currentBalance());
+                    System.out.println("O---------------------------------------O");
+                    Auth.pause(input);
                 } else if (depositAmount > 1000000000) { // Limit to 1 billion
                     System.out.println("O---------------------------------------O");
                     System.err.println("Amount too large! Maximum deposit is $1,000,000,000");
