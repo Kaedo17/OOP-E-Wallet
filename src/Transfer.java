@@ -6,6 +6,7 @@ public class Transfer {
     BalanceManager transferBalance = new BalanceManager("", username, pin);
     CurrentBalance currentBalance = new CurrentBalance(username, pin);
     Banners balanceBanner = new Banners();
+    TransacHistory history = new TransacHistory("", username);
 
     public void showTransfer(Scanner input) {
         boolean success = false;
@@ -41,6 +42,8 @@ public class Transfer {
                     System.out.println("O---------------------------------------O");
                     Auth.pause(input);
                 } else {
+                    history.setAmount(String.valueOf("-" + depositAmount));
+                    history.addTransac();
                     transferBalance.setTransfer((long) depositAmount);
                     transferBalance.transferBalance();
                     success = true;

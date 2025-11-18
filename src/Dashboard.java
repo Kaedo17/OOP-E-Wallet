@@ -33,6 +33,11 @@ public class Dashboard {
                         transfer.showTransfer(input);
                         break;
                     case "4":
+                        TransacHistory history = new TransacHistory("", Auth.getLoggedInUsername());
+                        history.shoeHistory();
+                        Auth.pause(input);
+                        break;
+                    case "5":
                         logout = true;
                         break;
                     default:
