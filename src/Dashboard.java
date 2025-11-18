@@ -33,7 +33,7 @@ public class Dashboard {
                         transfer.showTransfer(input);
                         break;
                     case "4":
-                        TransacHistory history = new TransacHistory("", Auth.getLoggedInUsername());
+                        TransacHistory history = new TransacHistory("", Auth.getLoggedInUsername(), "transfer");
                         history.shoeHistory();
                         Auth.pause(input);
                         break;

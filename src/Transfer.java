@@ -6,7 +6,7 @@ public class Transfer {
     BalanceManager transferBalance = new BalanceManager("", username, pin);
     CurrentBalance currentBalance = new CurrentBalance(username, pin);
     Banners balanceBanner = new Banners();
-    TransacHistory history = new TransacHistory("", username);
+    TransacHistory history = new TransacHistory("", username, "transfer");
 
     public void showTransfer(Scanner input) {
         boolean success = false;
@@ -42,10 +42,12 @@ public class Transfer {
                     System.out.println("O---------------------------------------O");
                     Auth.pause(input);
                 } else {
-                    history.setAmount(String.valueOf("-" + depositAmount));
+                    history.setAmount(String.valueOf(depositAmount));
+                    history.setType("transfer");
                     history.addTransac();
                     transferBalance.setTransfer((long) depositAmount);
                     transferBalance.transferBalance();
+                    Auth.pause(input);
                     success = true;
                 }
             } catch (NumberFormatException e) {

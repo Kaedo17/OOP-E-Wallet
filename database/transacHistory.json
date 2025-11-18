@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "username": "que",
+    "type": "deposit",
+    "amount": "10",
+    "timestamp": "2025-11-18 22:41:35"
+  },
+  {
+    "id": 2,
+    "username": "que",
+    "type": "transfer",
+    "amount": "10",
+    "timestamp": "2025-11-18 22:42:00"
+  }
+]

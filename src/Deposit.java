@@ -36,6 +36,9 @@ public class Deposit {
                 } else {
                     addBalance.setBalance((long) depositAmount);
                     addBalance.addBalance();
+                    TransacHistory history = new TransacHistory(String.valueOf(depositAmount), username, "deposit");
+                    history.addTransac();
+                    Auth.pause(input);
                     success = true;
                 }
             } catch (NumberFormatException e) {
