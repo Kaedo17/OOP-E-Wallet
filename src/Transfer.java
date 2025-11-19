@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Transfer {
     String username = Auth.getLoggedInUsername();
     int pin = Auth.getLoggedInPin();
-    BalanceManager transferBalance = new BalanceManager("", username, pin);
+    BalanceManager transferBalance = new BalanceManager("", username, "", pin);
     CurrentBalance currentBalance = new CurrentBalance(username, pin);
     Banners balanceBanner = new Banners();
     TransacHistory history = new TransacHistory("", username, "transfer");
@@ -15,6 +15,8 @@ public class Transfer {
             balanceBanner.new transferBanner().bannerShow();
             transferBalance.showBalance();
             balanceBanner.new transferBanner().bannerSingleOpt();
+            System.out.print("Recipient: ");
+            String toUser = input.nextLine().trim();
             System.out.print("Enter amount: ");
             String amount = input.nextLine().trim();
 
@@ -42,11 +44,15 @@ public class Transfer {
                     System.out.println("O---------------------------------------O");
                     Auth.pause(input);
                 } else {
-                    history.setAmount(String.valueOf(depositAmount));
-                    history.setType("transfer");
-                    history.addTransac();
+                    transferBalance.setRecipient(toUser);
                     transferBalance.setTransfer((long) depositAmount);
-                    transferBalance.transferBalance();
+                    boolean transferSuccess = transferBalance.transferBalance();
+
+                    if (transferSuccess) {
+                        history.setAmount(String.valueOf("-" + depositAmount));
+                        history.setType("transfer to " + toUser);
+                        history.addTransac();
+                    }
                     Auth.pause(input);
                     success = true;
                 }

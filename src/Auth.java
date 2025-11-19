@@ -100,7 +100,7 @@ public class Auth {
 
                 setUsername(inputUsername);
                 setPin(inputPin);
-                BalanceManager balanceManager = new BalanceManager("", inputUsername, inputPin);
+                BalanceManager balanceManager = new BalanceManager("", inputUsername,"", inputPin);
 
                 if (userValidator()) {
                     System.out.println("O---------------------------------------O");

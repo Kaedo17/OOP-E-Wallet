@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Deposit {
     String username = Auth.getLoggedInUsername();
     int pin = Auth.getLoggedInPin();
-    BalanceManager addBalance = new BalanceManager("", username, pin);
+    BalanceManager addBalance = new BalanceManager("", username,"", pin);
     Banners balanceBanner = new Banners();
 
     public void showDeposit(Scanner input) {

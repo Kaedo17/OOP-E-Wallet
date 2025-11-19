@@ -12,5 +12,40 @@
     "type": "transfer",
     "amount": "10",
     "timestamp": "2025-11-18 22:42:00"
+  },
+  {
+    "id": 3,
+    "username": "que",
+    "type": "transfer",
+    "amount": "10",
+    "timestamp": "2025-11-19 11:21:59"
+  },
+  {
+    "id": 4,
+    "username": "que",
+    "type": "transfer to wudahel",
+    "amount": "-5",
+    "timestamp": "2025-11-19 12:50:32"
+  },
+  {
+    "id": 5,
+    "username": "que",
+    "type": "transfer to popo",
+    "amount": "-1",
+    "timestamp": "2025-11-19 12:50:54"
+  },
+  {
+    "id": 6,
+    "username": "wudahel",
+    "type": "transfer to que",
+    "amount": "-60",
+    "timestamp": "2025-11-19 12:58:07"
+  },
+  {
+    "id": 7,
+    "username": "wudahel",
+    "type": "transfer to que",
+    "amount": "-1",
+    "timestamp": "2025-11-19 12:58:30"
   }
 ]

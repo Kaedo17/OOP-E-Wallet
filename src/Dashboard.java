@@ -8,7 +8,7 @@ public class Dashboard {
         boolean logout = false;
         while (!logout) {
             Auth.clearConsole();
-            BalanceManager balanceManager = new BalanceManager("", Auth.getLoggedInUsername(), Auth.getLoggedInPin());
+            BalanceManager balanceManager = new BalanceManager("", Auth.getLoggedInUsername(), "", Auth.getLoggedInPin());
             balanceBanner.new BalanceBanner().bannerShow();
             balanceManager.showBalance();
 

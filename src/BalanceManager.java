@@ -12,13 +12,15 @@ import com.google.gson.JsonParser;
 public class BalanceManager {
     private String balanceUsername;
     private String balanceRealName;
+    private String recipientName;
     private int balancePin;
     private long balanceBalance;
     private long transferBalance;
 
-    public BalanceManager(String balanceRealName, String balanceUsername, int balancePin) {
+    public BalanceManager(String balanceRealName, String balanceUsername, String recipientName, int balancePin) {
         setUsername(balanceUsername);
         setRealName(balanceRealName);
+        setRecipient(recipientName);
         setPin(balancePin);
         setBalance(0);
         setTransfer(0);
@@ -42,6 +44,14 @@ public class BalanceManager {
 
     public long getTransfer() {
         return transferBalance;
+    }
+
+    public String getRecipient() {
+        return recipientName;
+    }
+
+    public final void setRecipient(String recipientName) {
+        this.recipientName = recipientName;
     }
 
     public final void setUsername(String balanceUsername) {
@@ -164,6 +174,7 @@ public class BalanceManager {
                     userFound = true;
                     break;
                 }
+
             }
 
             if (userFound) {
@@ -187,19 +198,19 @@ public class BalanceManager {
 
     }
 
-    public void transferBalance() {
+    public boolean transferBalance() {
+        boolean hasSufficientBalance = false;
         Path file = Paths.get("database").resolve("user.json");
         if (!Files.exists(file)) {
             System.out.println("Database not found");
             System.out.println("O---------------------------------------O");
-            return;
+            return false;
         }
         try (Reader r = Files.newBufferedReader(file)) {
             JsonElement root = JsonParser.parseReader(r);
             JsonArray users = root.getAsJsonArray();
 
             boolean userFound = false;
-            boolean hasSufficientBalance = false; // Add this flag
 
             for (JsonElement e : users) {
                 JsonObject u = e.getAsJsonObject();
@@ -226,6 +237,27 @@ public class BalanceManager {
                         System.out.println("O---------------------------------------O");
                         hasSufficientBalance = true;
                     }
+
+                    if (storedUser.equals(getRecipient())) {
+                        long newBalance = currentBalance + getTransfer();
+                        u.addProperty("balance", newBalance);
+                        break;
+                    }
+
+                }
+            }
+
+            for (JsonElement e : users) {
+                JsonObject u = e.getAsJsonObject();
+                if (!u.has("username") || !u.has("balance"))
+                    continue;
+
+                String storedUser = u.get("username").getAsString();
+
+                if (storedUser.equals(getRecipient())) {
+                    long currentBalance = u.get("balance").getAsLong();
+                    long newBalance = currentBalance + getTransfer();
+                    u.addProperty("balance", newBalance);
                     break;
                 }
             }
@@ -249,6 +281,6 @@ public class BalanceManager {
             System.out.println("Error processing transfer.");
             System.out.println("O---------------------------------------O");
         }
+        return hasSufficientBalance;
     }
-
 }
