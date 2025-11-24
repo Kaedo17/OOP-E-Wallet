@@ -1,6 +1,5 @@
 import com.google.gson.*;
 import java.io.*;
-//import java.util.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -10,12 +9,29 @@ public class JsonGen {
     private String username;
     private String realName;
     private int pin;
+    private String phone;
+    private String email;
+    private String beneficiary;
+    private String address;
+    private String dob;
+    private String sex;
 
     public JsonGen(String realName, String username, int pin) {
         setUsername(username);
         setRealName(realName);
         setPin(pin);
+    }
 
+    public JsonGen(String realName, String username, int pin, String phone, String email, String beneficiary, String address, String dob, String sex) {
+        setUsername(username);
+        setRealName(realName);
+        setPin(pin);
+        setPhone(phone);
+        setEmail(email);
+        setBeneficiary(beneficiary);
+        setAddress(address);
+        setDob(dob);
+        setSex(sex);
     }
 
     public String getUsername() {
@@ -30,6 +46,30 @@ public class JsonGen {
         return pin;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getBeneficiary() {
+        return beneficiary;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getDob() {
+        return dob;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
     public final void setRealName(String realName) {
         this.realName = realName;
     }
@@ -40,6 +80,30 @@ public class JsonGen {
 
     public final void setPin(int pin) {
         this.pin = pin;
+    }
+
+    public final void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public final void setEmail(String email) {
+        this.email = email;
+    }
+
+    public final void setBeneficiary(String beneficiary) {
+        this.beneficiary = beneficiary;
+    }
+
+    public final void setAddress(String address) {
+        this.address = address;
+    }
+
+    public final void setDob(String dob) {
+        this.dob = dob;
+    }
+
+    public final void setSex(String sex) {
+        this.sex = sex;
     }
 
     public void updateJson() {
@@ -64,10 +128,15 @@ public class JsonGen {
         newUser.addProperty("id", nextId);
         newUser.addProperty("Name", getRealName());
         newUser.addProperty("username", getUsername());
-        // store PIN as a zero-padded 4-digit string so leading zeros are preserved
         String pinStr = String.format("%04d", pin);
         newUser.addProperty("pin", pinStr);
         newUser.addProperty("balance", 0);
+        newUser.addProperty("phone", getPhone());
+        newUser.addProperty("email", getEmail());
+        newUser.addProperty("beneficiary", getBeneficiary());
+        newUser.addProperty("address", getAddress());
+        newUser.addProperty("dob", getDob());
+        newUser.addProperty("sex", getSex());
         users.add(newUser);
 
         try (FileWriter writer = new FileWriter("database/user.json")) {
@@ -103,5 +172,4 @@ public class JsonGen {
         }
         return false;
     }
-
 }

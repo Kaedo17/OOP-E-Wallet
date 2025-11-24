@@ -33,5 +33,18 @@
     "username": "rus",
     "pin": "2222",
     "balance": 50
+  },
+  {
+    "id": 6,
+    "Name": "jhjgj",
+    "username": "jhbj",
+    "pin": "4444",
+    "balance": 0,
+    "phone": "kjhkj",
+    "email": "ljl",
+    "beneficiary": "lkjl",
+    "address": "jlj",
+    "dob": "7675764",
+    "sex": "male"
   }
 ]
