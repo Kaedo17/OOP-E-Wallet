@@ -3,13 +3,13 @@ public class Banners {
         public abstract void bannerShow();
 
         public void bannerSingleOpt() {
-            System.out.println("|               [1] Back                |");
-            System.out.println("O---------------------------------------O");
+            System.out.println("║              [1] Back                 ║");
+            System.out.println("╚═══════════════════════════════════════╝");
         }
 
         public void bannerDoubleOpt() {
-            System.out.println("|           [1] Back [2] Exit           |");
-            System.out.println("O---------------------------------------O");
+            System.out.println("║          [1] Back  [2] Exit           ║");
+            System.out.println("╚═══════════════════════════════════════╝");
         }
 
     }
@@ -17,18 +17,18 @@ public class Banners {
     public class LoginBanner extends Banner {
         @Override
         public void bannerShow() {
-            System.out.println("O---------------------------------------O");
-            System.out.println("|              L O G I N                |");
-            System.out.println("O---------------------------------------O");
+            System.out.println("╔═══════════════════════════════════════╗");
+            System.out.println("║              L O G I N                ║");
+            System.out.println("╠═══════════════════════════════════════╣");
         }
     }
 
     public class SignInBanner extends Banner {
         @Override
         public void bannerShow() {
-            System.out.println("O---------------------------------------O");
-            System.out.println("|             S I G N   I N             |");
-            System.out.println("O---------------------------------------O");
+            System.out.println("╔═══════════════════════════════════════╗");
+            System.out.println("║             S I G N   I N             ║");
+            System.out.println("╠═══════════════════════════════════════╣");
         }
 
     }
@@ -36,19 +36,18 @@ public class Banners {
     public class BalanceBanner extends Banner {
         @Override
         public void bannerShow() {
-            System.out.println("O---------------------------------------O");
-            System.out.println("|             B A L A N C E             |");
-            System.out.println("O---------------------------------------O");
-
+            System.out.println("╔═══════════════════════════════════════╗");
+            System.out.println("║             B A L A N C E             ║");
+            System.out.println("╠═══════════════════════════════════════╣");
         }
 
         public void balanceBannerOpts() {
-            System.out.println("1. Refresh balance");
-            System.out.println("2. Deposit");
-            System.out.println("3. Send/Transfer");
-            System.out.println("4. Transaction History");
-            System.out.println("5. Logout");
-            System.out.println("O---------------------------------------O");
+            System.out.println("║  1. Refresh balance                   ║");
+            System.out.println("║  2. Deposit                           ║");
+            System.out.println("║  3. Send/Transfer                     ║");
+            System.out.println("║  4. Transaction History               ║");
+            System.out.println("║  5. Logout                            ║");
+            System.out.println("╚═══════════════════════════════════════╝");
         }
 
     }
@@ -56,27 +55,25 @@ public class Banners {
     public class DepositBanner extends Banner {
         @Override
         public void bannerShow() {
-            System.out.println("O---------------------------------------O");
-            System.out.println("|             D E P O S I T             |");
-            System.out.println("O---------------------------------------O");
+            System.out.println("╔═══════════════════════════════════════╗");
+            System.out.println("║             D E P O S I T             ║");
+            System.out.println("╠═══════════════════════════════════════╣");
         }
 
         @Override
         public void bannerSingleOpt() {
-            System.out.println("|               [:1] Back               |");
-            System.out.println("O---------------------------------------O");
+            System.out.println("║              [:1] Back                ║");
+            System.out.println("╚═══════════════════════════════════════╝");
         }
     }
 
     public class TransferBanner extends DepositBanner {
         @Override
         public void bannerShow() {
-            System.out.println("O---------------------------------------O");
-            System.out.println("|            T R A N S F E R            |");
-            System.out.println("O---------------------------------------O");
+            System.out.println("╔═══════════════════════════════════════╗");
+            System.out.println("║            T R A N S F E R            ║");
+            System.out.println("╠═══════════════════════════════════════╣");
         }
-
-        
     }
 
     public Banner getLoginBanner() {

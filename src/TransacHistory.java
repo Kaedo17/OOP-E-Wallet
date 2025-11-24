@@ -30,23 +30,23 @@ public class TransacHistory {
     public String getAmount() {
         return amount;
     }
-    
+
     public String getUsername() {
         return username;
     }
-    
+
     public String getType() {
         return type;
     }
-    
+
     public final void setAmount(String amount) {
         this.amount = amount;
     }
-    
+
     public final void setUsername(String username) {
         this.username = username;
     }
-    
+
     public final void setType(String type) {
         this.type = type;
     }
@@ -55,7 +55,7 @@ public class TransacHistory {
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String timestamp = now.format(formatter);
-        
+
         JsonArray transactions;
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         int nextId = 1;
@@ -87,7 +87,6 @@ public class TransacHistory {
         newTransaction.addProperty("timestamp", timestamp);
         transactions.add(newTransaction);
 
-        
         try (FileWriter writer = new FileWriter(file.toFile())) {
             gson.toJson(transactions, writer);
             System.out.println("Transaction recorded successfully!");
@@ -100,9 +99,9 @@ public class TransacHistory {
         Auth.clearConsole();
         Path file = Paths.get("database").resolve("transacHistory.json");
         if (!Files.exists(file)) {
-            System.out.println("O---------------------------------------O");
-            System.out.println("No transaction history found.");
-            System.out.println("O---------------------------------------O");
+            System.out.println("╔═══════════════════════════════════════╗");
+            System.out.println("║     No transaction history found.     ║");
+            System.out.println("╚═══════════════════════════════════════╝");
             return;
         }
 
@@ -110,10 +109,11 @@ public class TransacHistory {
             JsonElement root = JsonParser.parseReader(r);
             JsonArray transactions = root.isJsonArray() ? root.getAsJsonArray() : new JsonArray();
 
-            System.out.println("O---------------------------------------O");
-            System.out.println("      TRANSACTION HISTORY FOR " + getUsername().toUpperCase());
-            System.out.println("O---------------------------------------O");
-            
+            System.out.println("╔═══════════════════════════════════════╗");
+            System.out.println("      TRANSACTION HISTORY FOR " +
+                    String.format("%-10s", getUsername().toUpperCase()));
+            System.out.println("╠═══════════════════════════════════════╣");
+
             boolean found = false;
             for (JsonElement e : transactions) {
                 JsonObject t = e.getAsJsonObject();
@@ -121,28 +121,31 @@ public class TransacHistory {
                     continue;
 
                 String storedUser = t.get("username").getAsString();
-                
+
                 if (storedUser.equals(getUsername())) {
                     String transcaType = t.get("type").getAsString();
                     String transacAmount = t.get("amount").getAsString();
                     String timestamp = t.get("timestamp").getAsString();
-                    
-                    System.out.println("Date: " + timestamp);
-                    System.out.println("Type: " + transcaType.toUpperCase());
-                    System.out.println("Amount: $" + transacAmount);
-                    System.out.println("O---------------------------------------O");
+
+                    System.out.println("║ Date: " + String.format("%-31s", timestamp) + " ║");
+                    System.out.println("║ Type: " + String.format("%-31s", transcaType.toUpperCase()) + " ║");
+                    System.out.println("║ Amount: $" + String.format("%-28s", transacAmount) + " ║");
+                    System.out.println("╠═══════════════════════════════════════╣");
                     found = true;
                 }
             }
-            
+
             if (!found) {
-                System.out.println("No transactions found for your account.");
-                System.out.println("O---------------------------------------O");
+                System.out.println("║  No transactions found for account.   ║");
+                System.out.println("╚═══════════════════════════════════════╝");
+            } else {
+                System.out.println("║            End of History             ║");
+                System.out.println("╚═══════════════════════════════════════╝");
             }
         } catch (Exception ex) {
-            System.out.println("O---------------------------------------O");
-            System.out.println("Error retrieving transaction history: " + ex.getMessage());
-            System.out.println("O---------------------------------------O");
+            System.out.println("╔═══════════════════════════════════════╗");
+            System.out.println("║   Error retrieving transaction history║");
+            System.out.println("╚═══════════════════════════════════════╝");
         }
     }
 }

@@ -93,8 +93,9 @@ public class BalanceManager {
     public void showBalance() {
         Path file = Paths.get("database").resolve("user.json");
         if (!Files.exists(file)) {
-            System.out.println("Database not found");
-            System.out.println("O---------------------------------------O");
+            System.out.println("╔═══════════════════════════════════════╗");
+            System.out.println("║           Database not found          ║");
+            System.out.println("╚═══════════════════════════════════════╝");
             return;
         }
         try (Reader r = Files.newBufferedReader(file)) {
@@ -112,26 +113,25 @@ public class BalanceManager {
                 String storedPin = u.get("pin").getAsString();
                 String enteredPin = String.format("%04d", getPin());
 
-                // Check if username AND pin match
                 if (storedUser.equals(getUsername()) && storedPin.equals(enteredPin)) {
                     long balance = u.get("balance").getAsLong();
-                    System.out.println("        Current Balance: $" + balance);
-                    System.out.println("O---------------------------------------O");
+                    System.out.println("         Current Balance: $" + balance);
+                    System.out.println("╚═══════════════════════════════════════╝");
                     userFound = true;
                     break;
                 }
             }
 
             if (!userFound) {
-                System.out.println("User not found or invalid credentials.");
-                System.out.println("O---------------------------------------O");
+                System.out.println("╔═══════════════════════════════════════╗");
+                System.out.println("║ User not found or invalid credentials ║");
+                System.out.println("╚═══════════════════════════════════════╝");
             }
         } catch (Exception ex) {
-            System.out.println("O---------------------------------------O");
-            System.out.println("Error retrieving balance.");
-            System.out.println("O---------------------------------------O");
+            System.out.println("╔═══════════════════════════════════════╗");
+            System.out.println("║        Error retrieving balance.      ║");
+            System.out.println("╚═══════════════════════════════════════╝");
         }
-
     }
 
     public void addBalance() {

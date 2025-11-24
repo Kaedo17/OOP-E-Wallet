@@ -15,9 +15,9 @@ public class Dashboard {
             System.out.print("Select an option: ");
             String choice = input.nextLine().trim();
             if (null == choice) {
-                System.out.println("O---------------------------------------O");
-                System.out.println("Invalid option.");
-                System.out.println("O---------------------------------------O");
+                System.out.println("╔═══════════════════════════════════════╗");
+                System.out.println("║            Invalid option.            ║");
+                System.out.println("╚═══════════════════════════════════════╝");
                 Auth.pause(input);
             } else
                 switch (choice) {
@@ -40,9 +40,9 @@ public class Dashboard {
                         logout = true;
                         break;
                     default:
-                        System.out.println("O---------------------------------------O");
-                        System.out.println("Invalid option.");
-                        System.out.println("O---------------------------------------O");
+                        System.out.println("╔═══════════════════════════════════════╗");
+                        System.out.println("║            Invalid option.            ║");
+                        System.out.println("╚═══════════════════════════════════════╝");
                         Auth.pause(input);
                         break;
                 }
