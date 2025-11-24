@@ -7,7 +7,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 public class Auth {
-    Banners loginBanner = new Banners();
+    private final Banners banners = new Banners();
     private static String loggedInUsername;
     private static int loggedInPin;
 
@@ -45,8 +45,7 @@ public class Auth {
         this.pin = pin;
     }
 
-    public void login() {
-        Scanner input = new Scanner(System.in);
+    public void login(Scanner input) {
         boolean isLoggedIn = false;
 
         outer: while (!isLoggedIn) {
@@ -56,8 +55,9 @@ public class Auth {
                 String inputUsername;
                 do {
                     Auth.clearConsole();
-                    loginBanner.new LoginBanner().bannerShow();
-                    loginBanner.new LoginBanner().bannerSingleOpt();
+
+                    banners.getLoginBanner().bannerShow();
+                    banners.getLoginBanner().bannerSingleOpt();
 
                     System.out.print("Enter username: ");
                     inputUsername = input.nextLine().trim();
@@ -68,15 +68,16 @@ public class Auth {
 
                     if (inputUsername.isEmpty()) {
                         System.out.println("O------------------------------------------------O");
-                        System.err.println("Username cannot be empty. Please enter a username.");
+                        System.out.println("Username cannot be empty. Please enter a username.");
                         System.out.println("O------------------------------------------------O");
                         Auth.pause(input);
                         continue outer; // re-prompt username
                     }
 
                     Auth.clearConsole();
-                    loginBanner.new LoginBanner().bannerShow();
-                    loginBanner.new LoginBanner().bannerDoubleOpt();
+                    banners.getLoginBanner().bannerShow();
+                    banners.getLoginBanner().bannerDoubleOpt();
+                    
                     System.out.print("Enter pin: ");
 
                     try {
@@ -93,14 +94,14 @@ public class Auth {
                         System.out.println("O---------------------------------------O");
                         pause(input);
                         clearConsole();
-                        loginBanner.new LoginBanner().bannerShow();
+                        banners.getLoginBanner().bannerShow();
                         System.out.print("Enter pin again: ");
                     }
                 } while (!validPin);
 
                 setUsername(inputUsername);
                 setPin(inputPin);
-                BalanceManager balanceManager = new BalanceManager("", inputUsername,"", inputPin);
+                BalanceManager balanceManager = new BalanceManager("", inputUsername, "", inputPin);
 
                 if (userValidator()) {
                     System.out.println("O---------------------------------------O");

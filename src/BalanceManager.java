@@ -11,7 +11,6 @@ import com.google.gson.JsonParser;
 
 public class BalanceManager {
     private String balanceUsername;
-    private String balanceRealName;
     private String recipientName;
     private int balancePin;
     private long balanceBalance;
@@ -19,7 +18,6 @@ public class BalanceManager {
 
     public BalanceManager(String balanceRealName, String balanceUsername, String recipientName, int balancePin) {
         setUsername(balanceUsername);
-        setRealName(balanceRealName);
         setRecipient(recipientName);
         setPin(balancePin);
         setBalance(0);
@@ -28,10 +26,6 @@ public class BalanceManager {
 
     public String getUsername() {
         return balanceUsername;
-    }
-
-    public String getRealName() {
-        return balanceRealName;
     }
 
     public int getPin() {
@@ -56,10 +50,6 @@ public class BalanceManager {
 
     public final void setUsername(String balanceUsername) {
         this.balanceUsername = balanceUsername;
-    }
-
-    public final void setRealName(String balanceRealName) {
-        this.balanceRealName = balanceRealName;
     }
 
     public final void setPin(int balancePin) {

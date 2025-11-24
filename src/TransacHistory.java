@@ -96,7 +96,7 @@ public class TransacHistory {
         }
     }
 
-    public void shoeHistory() {
+    public void showHistory() {
         Auth.clearConsole();
         Path file = Paths.get("database").resolve("transacHistory.json");
         if (!Files.exists(file)) {

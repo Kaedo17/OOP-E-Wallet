@@ -53,7 +53,7 @@ public class Banners {
 
     }
 
-    public class depositBanner extends Banner {
+    public class DepositBanner extends Banner {
         @Override
         public void bannerShow() {
             System.out.println("O---------------------------------------O");
@@ -68,7 +68,7 @@ public class Banners {
         }
     }
 
-    public class transferBanner extends depositBanner {
+    public class TransferBanner extends DepositBanner {
         @Override
         public void bannerShow() {
             System.out.println("O---------------------------------------O");
@@ -79,26 +79,6 @@ public class Banners {
         
     }
 
-    public void showLoginBanner() {
-        new LoginBanner().bannerShow();
-    }
-
-    public void showSignInBanner() {
-        new SignInBanner().bannerShow();
-    }
-
-    public void showBalanceBanner() {
-        new BalanceBanner().bannerShow();
-    }
-
-    public void showDepositBanner() {
-        new depositBanner().bannerShow();
-    }
-
-    public void showTransferBanner() {
-        new transferBanner().bannerShow();
-    }
-
     public Banner getLoginBanner() {
         return new LoginBanner();
     }
@@ -107,15 +87,15 @@ public class Banners {
         return new SignInBanner();
     }
 
-    public Banner getBalanceBanner() {
+    public BalanceBanner getBalanceBanner() {
         return new BalanceBanner();
     }
 
     public Banner getDepositBanner() {
-        return new depositBanner();
+        return new DepositBanner();
     }
 
     public Banner getTransferBanner() {
-        return new transferBanner();
+        return new TransferBanner();
     }
 }

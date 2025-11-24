@@ -11,13 +11,27 @@
     "Name": "Kurt",
     "username": "que",
     "pin": "2323",
-    "balance": 95
+    "balance": 140
   },
   {
     "id": 3,
     "Name": "Frandy",
     "username": "popo",
     "pin": "1234",
-    "balance": 19
+    "balance": 24
+  },
+  {
+    "id": 4,
+    "Name": "Kurkfn",
+    "username": "pp",
+    "pin": "1122",
+    "balance": 0
+  },
+  {
+    "id": 5,
+    "Name": "Russel",
+    "username": "rus",
+    "pin": "2222",
+    "balance": 50
   }
 ]

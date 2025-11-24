@@ -1,18 +1,17 @@
 import java.util.Scanner;
 
 public class Dashboard {
-
-    Banners balanceBanner = new Banners();
+    private final Banners banners = new Banners();
 
     public void displayDashboard(Scanner input) {
         boolean logout = false;
         while (!logout) {
             Auth.clearConsole();
             BalanceManager balanceManager = new BalanceManager("", Auth.getLoggedInUsername(), "", Auth.getLoggedInPin());
-            balanceBanner.new BalanceBanner().bannerShow();
+            banners.getBalanceBanner().bannerShow();
             balanceManager.showBalance();
 
-            balanceBanner.new BalanceBanner().balanceBannerOpts();
+            banners.getBalanceBanner().balanceBannerOpts();
             System.out.print("Select an option: ");
             String choice = input.nextLine().trim();
             if (null == choice) {
@@ -34,7 +33,7 @@ public class Dashboard {
                         break;
                     case "4":
                         TransacHistory history = new TransacHistory("", Auth.getLoggedInUsername(), "transfer");
-                        history.shoeHistory();
+                        history.showHistory();
                         Auth.pause(input);
                         break;
                     case "5":

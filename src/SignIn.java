@@ -25,7 +25,7 @@ public class SignIn {
           return;
         } else if (inputRealName.isEmpty()) {
           System.out.println("O------------------------------------------------O");
-          System.err.println("Username cannot be empty. Please enter a username.");
+          System.out.println("Username cannot be empty. Please enter a username.");
           System.out.println("O------------------------------------------------O");
           Auth.pause(input);
           Auth.clearConsole();
@@ -46,13 +46,13 @@ public class SignIn {
               continue outer;
             } else if (inputUsername.isEmpty()) {
               System.out.println("O------------------------------------------------O");
-              System.err.println("Username cannot be empty. Please enter a username.");
+              System.out.println("Username cannot be empty. Please enter a username.");
               System.out.println("O------------------------------------------------O");
               Auth.pause(input);
               continue outer; // re-prompt username
             } else if (checker.userChecker()) {
               System.out.println("O----------------------------------------------------------O");
-              System.err.println("Username already exists. Please choose a different username.");
+              System.out.println("Username already exists. Please choose a different username.");
               System.out.println("O----------------------------------------------------------O");
               Auth.pause(input);
               continue userNamePoint; // re-prompt username
@@ -82,7 +82,7 @@ public class SignIn {
             // Validate that the input is exactly 4 digits
             if (!pinStr.matches("\\d{4}")) {
               System.out.println("O-------------------------------------------------O");
-              System.err.println("Error: PIN must be exactly 4 digits (numbers only)!");
+              System.out.println("Error: PIN must be exactly 4 digits (numbers only)!");
               System.out.println("O-------------------------------------------------O");
               Auth.pause(input);
               Auth.clearConsole();
@@ -118,7 +118,7 @@ public class SignIn {
 
       } catch (NumberFormatException e) {
         System.out.println("O---------------------------------------O");
-        System.err.println("Unexpected error: " + e.getMessage());
+        System.out.println("Unexpected error: " + e.getMessage());
         System.out.println("O---------------------------------------O");
         Auth.pause(input);
         Auth.clearConsole();

@@ -12,35 +12,40 @@ public class Transfer {
         boolean success = false;
         while (!success) {
             Auth.clearConsole();
-            balanceBanner.new transferBanner().bannerShow();
+            balanceBanner.new TransferBanner().bannerShow();
             transferBalance.showBalance();
-            balanceBanner.new transferBanner().bannerSingleOpt();
+            balanceBanner.new TransferBanner().bannerSingleOpt();
             System.out.print("Recipient: ");
             String toUser = input.nextLine().trim();
+
+            if (":1".equals(toUser)) {
+                return;
+            }
+
             System.out.print("Enter amount: ");
             String amount = input.nextLine().trim();
 
             if (":1".equals(amount)) {
-                return; // Go back to dashboard
+                continue;
             }
 
             try {
                 long depositAmount = Long.parseLong(amount);
                 if (depositAmount <= 0) {
                     System.out.println("O---------------------------------------O");
-                    System.err.println("Amount must be positive!");
+                    System.out.println("Amount must be positive!");
                     System.out.println("O---------------------------------------O");
                     Auth.pause(input);
 
                 } else if (currentBalance.currentBalance() < depositAmount) {
                     System.out.println("O---------------------------------------O");
-                    System.err.println("Insufficient Balance!");
+                    System.out.println("Insufficient Balance!");
                     System.out.println("Current balance: $" + currentBalance.currentBalance());
                     System.out.println("O---------------------------------------O");
                     Auth.pause(input);
                 } else if (depositAmount > 1000000000) { // Limit to 1 billion
                     System.out.println("O---------------------------------------O");
-                    System.err.println("Amount too large! Maximum deposit is $1,000,000,000");
+                    System.out.println("Amount too large! Maximum deposit is $1,000,000,000");
                     System.out.println("O---------------------------------------O");
                     Auth.pause(input);
                 } else {
@@ -58,7 +63,7 @@ public class Transfer {
                 }
             } catch (NumberFormatException e) {
                 System.out.println("O---------------------------------------O");
-                System.err.println("Invalid amount! Please enter numbers only.");
+                System.out.println("Invalid amount! Please enter numbers only.");
                 System.out.println("O---------------------------------------O");
                 Auth.pause(input);
             }
