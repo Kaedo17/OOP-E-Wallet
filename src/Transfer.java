@@ -20,6 +20,12 @@ public class Transfer {
 
             if (":1".equals(toUser)) {
                 return;
+            } else if (toUser.isEmpty() || toUser.matches("[0-9-]+")) {
+                System.out.println("O------------------------------------------------O");
+                System.out.println("Invalid username.");
+                System.out.println("O------------------------------------------------O");
+                Auth.pause(input);
+                continue;
             }
 
             System.out.print("Enter amount: ");
@@ -40,12 +46,12 @@ public class Transfer {
                 } else if (currentBalance.currentBalance() < depositAmount) {
                     System.out.println("O---------------------------------------O");
                     System.out.println("Insufficient Balance!");
-                    System.out.println("Current balance: $" + currentBalance.currentBalance());
+                    System.out.println("Current balance: ₱" + currentBalance.currentBalance());
                     System.out.println("O---------------------------------------O");
                     Auth.pause(input);
                 } else if (depositAmount > 1000000000) { // Limit to 1 billion
                     System.out.println("O---------------------------------------O");
-                    System.out.println("Amount too large! Maximum deposit is $1,000,000,000");
+                    System.out.println("Amount too large! Maximum deposit is ₱1,000,000,000");
                     System.out.println("O---------------------------------------O");
                     Auth.pause(input);
                 } else {

@@ -115,7 +115,7 @@ public class BalanceManager {
 
                 if (storedUser.equals(getUsername()) && storedPin.equals(enteredPin)) {
                     long balance = u.get("balance").getAsLong();
-                    System.out.println("         Current Balance: $" + balance);
+                    System.out.println("         Current Balance: ₱" + balance);
                     System.out.println("╚═══════════════════════════════════════╝");
                     userFound = true;
                     break;
@@ -216,14 +216,14 @@ public class BalanceManager {
                     if (currentBalance < getTransfer()) { // Change > to <
                         System.out.println("O---------------------------------------O");
                         System.out.println("Insufficient balance for transfer!");
-                        System.out.println("Current balance: $" + currentBalance);
+                        System.out.println("Current balance: ₱" + currentBalance);
                         System.out.println("O---------------------------------------O");
                         hasSufficientBalance = false;
                     } else {
                         long newBalance = currentBalance - getTransfer();
                         u.addProperty("balance", newBalance);
                         System.out.println("O---------------------------------------O");
-                        System.out.println("Transfer successful! New balance: $" + newBalance);
+                        System.out.println("Transfer successful! New balance: ₱" + newBalance);
                         System.out.println("O---------------------------------------O");
                         hasSufficientBalance = true;
                     }

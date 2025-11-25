@@ -54,7 +54,7 @@ public class SignIn {
             System.out.println("Phone cannot be empty.");
             System.out.println("O------------------------------------------------O");
             Auth.pause(input);
-          } else if (inputDob.isEmpty() || !inputDob.matches("[0-9-]+")) {
+          } else if (inputPhone.isEmpty() || !inputPhone.matches("[0-9-]+")) {
             System.out.println("O------------------------------------------------O");
             System.out.println("Invalid date.");
             System.out.println("O------------------------------------------------O");

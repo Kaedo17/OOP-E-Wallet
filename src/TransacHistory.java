@@ -129,7 +129,7 @@ public class TransacHistory {
 
                     System.out.println("║ Date: " + String.format("%-31s", timestamp) + " ║");
                     System.out.println("║ Type: " + String.format("%-31s", transcaType.toUpperCase()) + " ║");
-                    System.out.println("║ Amount: $" + String.format("%-28s", transacAmount) + " ║");
+                    System.out.println("║ Amount: ₱" + String.format("%-28s", transacAmount) + " ║");
                     System.out.println("╠═══════════════════════════════════════╣");
                     found = true;
                 }

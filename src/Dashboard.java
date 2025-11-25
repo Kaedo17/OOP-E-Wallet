@@ -7,7 +7,8 @@ public class Dashboard {
         boolean logout = false;
         while (!logout) {
             Auth.clearConsole();
-            BalanceManager balanceManager = new BalanceManager("", Auth.getLoggedInUsername(), "", Auth.getLoggedInPin());
+            BalanceManager balanceManager = new BalanceManager("", Auth.getLoggedInUsername(), "",
+                    Auth.getLoggedInPin());
             banners.getBalanceBanner().bannerShow();
             balanceManager.showBalance();
 
@@ -39,6 +40,9 @@ public class Dashboard {
                     case "5":
                         ShowProfile profile = new ShowProfile(Auth.getLoggedInUsername());
                         profile.showProfile();
+                        if (profile.isAccountDeleted()) {
+                            return;
+                        }
                         Auth.pause(input);
                         break;
                     case "6":

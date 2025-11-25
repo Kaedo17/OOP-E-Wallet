@@ -1,50 +1,15 @@
 [
   {
     "id": 1,
-    "Name": "Karl",
-    "username": "wudahel",
-    "pin": "0000",
-    "balance": 19299
-  },
-  {
-    "id": 2,
-    "Name": "Kurt",
-    "username": "que",
-    "pin": "2323",
-    "balance": 140
-  },
-  {
-    "id": 3,
-    "Name": "Frandy",
-    "username": "popo",
-    "pin": "1234",
-    "balance": 24
-  },
-  {
-    "id": 4,
-    "Name": "Kurkfn",
-    "username": "pp",
-    "pin": "1122",
-    "balance": 0
-  },
-  {
-    "id": 5,
-    "Name": "Russel",
-    "username": "rus",
-    "pin": "2222",
-    "balance": 50
-  },
-  {
-    "id": 6,
-    "Name": "jhjgj",
-    "username": "jhbj",
-    "pin": "4444",
-    "balance": 0,
-    "phone": "kjhkj",
-    "email": "ljl",
-    "beneficiary": "lkjl",
-    "address": "jlj",
-    "dob": "7675764",
-    "sex": "male"
+    "Name": "Rasol Slayman",
+    "username": "Rusty",
+    "pin": "5555",
+    "balance": 250,
+    "phone": "09123456789",
+    "email": "rasol@jeemail.com",
+    "beneficiary": "Nathan Surrosa",
+    "address": "Jaro Plaza",
+    "dob": "1999-9-11",
+    "sex": "Female"
   }
 ]

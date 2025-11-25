@@ -30,7 +30,7 @@ public class Deposit {
 
                 } else if (depositAmount > 1000000000) { // Limit to 1 billion
                     System.out.println("O---------------------------------------O");
-                    System.out.println("Amount too large! Maximum deposit is $1,000,000,000");
+                    System.out.println("Amount too large! Maximum deposit is ₱1,000,000,000");
                     System.out.println("O---------------------------------------O");
                     Auth.pause(input);
                 } else {
