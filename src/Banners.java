@@ -46,7 +46,8 @@ public class Banners {
             System.out.println("║  2. Deposit                           ║");
             System.out.println("║  3. Send/Transfer                     ║");
             System.out.println("║  4. Transaction History               ║");
-            System.out.println("║  5. Logout                            ║");
+            System.out.println("║  5. Profile                           ║");
+            System.out.println("║  6. Logout                            ║");
             System.out.println("╚═══════════════════════════════════════╝");
         }
 

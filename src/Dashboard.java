@@ -37,6 +37,11 @@ public class Dashboard {
                         Auth.pause(input);
                         break;
                     case "5":
+                        ShowProfile profile = new ShowProfile(Auth.getLoggedInUsername());
+                        profile.showProfile();
+                        Auth.pause(input);
+                        break;
+                    case "6":
                         logout = true;
                         break;
                     default:
