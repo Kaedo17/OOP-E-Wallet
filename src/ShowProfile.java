@@ -131,7 +131,7 @@ public class ShowProfile {
                                 if (confirmAccountDeletion(input)) {
                                     deleteAccount(users, storedUser);
                                     System.out.println("╔═══════════════════════════════════════╗");
-                                    System.out.println("║      Account deleted successfully!     ║");
+                                    System.out.println("║      Account deleted successfully!    ║");
                                     System.out.println("╚═══════════════════════════════════════╝");
                                     Auth.pause(input);
                                     accountDeleted = true;

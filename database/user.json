@@ -24,5 +24,18 @@
     "address": "IloIlo, Antique",
     "dob": "2011-11-11",
     "sex": "Male"
+  },
+  {
+    "id": 3,
+    "Name": "Nathan Jezz Kazama",
+    "username": "Nathser",
+    "pin": "1111",
+    "balance": 0,
+    "phone": "09231456543",
+    "email": "jinkazama@nathan.sarrosa",
+    "beneficiary": "Rasol Slayman",
+    "address": "Santa Bulbasaur",
+    "dob": "2005-05-05",
+    "sex": "Female"
   }
 ]
