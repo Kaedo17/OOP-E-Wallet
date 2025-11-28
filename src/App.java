@@ -6,6 +6,7 @@ public class App {
         try (Scanner input = new Scanner(System.in)) {
             boolean exit = false;
             do {
+                Banners.printMainLogo();
                 System.out.println("╔═══════════════════════════════════════╗");
                 System.out.println("║            O N L I - B A N K          ║");
                 System.out.println("╠═══════════════════════════════════════╣");

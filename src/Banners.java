@@ -1,4 +1,20 @@
 public class Banners {
+    public static void printMainLogo() {
+        System.out.println();
+        System.out.println("╔════════════════════════════════════════════════════════════════════════╗");
+        System.out.println("║                                                                        ║");
+        System.out.println("║  ██████╗ ███╗   ██╗██╗     ██╗      ██████╗  █████╗ ███╗   ██╗██╗  ██╗ ║");
+        System.out.println("║ ██╔═══██╗████╗  ██║██║     ██║      ██╔══██╗██╔══██╗████╗  ██║██║ ██╔╝ ║");
+        System.out.println("║ ██║   ██║██╔██╗ ██║██║     ██║█████╗██████╔╝███████║██╔██╗ ██║█████╔╝  ║");
+        System.out.println("║ ██║   ██║██║╚██╗██║██║     ██║╚════╝██╔══██╗██╔══██║██║╚██╗██║██╔═██╗  ║");
+        System.out.println("║ ╚██████╔╝██║ ╚████║███████╗██║      ██████╔╝██║  ██║██║ ╚████║██║  ██╗ ║");
+        System.out.println("║  ╚═════╝ ╚═╝  ╚═══╝╚══════╝╚═╝      ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝ ║");
+        System.out.println("║                                                                        ║");
+        System.out.println("║                  Your Trusted Digital Banking Partner                  ║");
+        System.out.println("║                                                                        ║");
+        System.out.println("╚════════════════════════════════════════════════════════════════════════╝");
+        System.out.println();
+    }
     public abstract class Banner {
         public abstract void bannerShow();
 

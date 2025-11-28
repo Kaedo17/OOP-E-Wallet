@@ -21,6 +21,7 @@ public class SignIn {
 
     while (true) {
       Auth.clearConsole();
+      Banners.printMainLogo();
       signBanner.new SignInBanner().bannerShow();
       if (step == 0)
         signBanner.new SignInBanner().bannerSingleOpt();

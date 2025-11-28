@@ -55,7 +55,7 @@ public class Auth {
                 String inputUsername;
                 do {
                     Auth.clearConsole();
-
+                    Banners.printMainLogo();
                     banners.getLoginBanner().bannerShow();
                     banners.getLoginBanner().bannerSingleOpt();
 
@@ -75,6 +75,7 @@ public class Auth {
                     }
 
                     Auth.clearConsole();
+                    Banners.printMainLogo();
                     banners.getLoginBanner().bannerShow();
                     banners.getLoginBanner().bannerDoubleOpt();
                     
