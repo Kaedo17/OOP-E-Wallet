@@ -103,7 +103,7 @@ public class ShowProfile {
 
                         // Add delete account option
                         System.out.println("║  1. Back to Dashboard                 ║");
-                        System.out.println("║  2. Delete Account                    ║");
+                        System.out.println("║  2. Request Delete Account            ║");
                         System.out.println("╚═══════════════════════════════════════╝");
                         System.out.print("Select an option: ");
 
