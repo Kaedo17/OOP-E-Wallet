@@ -1,0 +1,11 @@
+[
+  {
+    "username": "ika",
+    "cardNumber": "3993 6212 9537 7705",
+    "expiryDate": "11/28",
+    "cvv": "738",
+    "creditLimit": 50000.0,
+    "availableCredit": 50000.0,
+    "currentBalance": 0.0
+  }
+]

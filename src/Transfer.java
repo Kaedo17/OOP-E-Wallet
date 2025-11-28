@@ -28,6 +28,20 @@ public class Transfer {
                 continue;
             }
 
+            // Ask for recipient's card number for verification
+            System.out.print("Recipient's Card Number (last 4 digits): ");
+            String recipientCardLast4 = input.nextLine().trim();
+
+            // Verify recipient's card
+            if (!CreditCard.validateCardForUser(toUser, recipientCardLast4)) {
+                System.out.println("O------------------------------------------------O");
+                System.out.println("Card number does not match recipient's account.");
+                System.out.println("Transfer failed.");
+                System.out.println("O------------------------------------------------O");
+                Auth.pause(input);
+                continue;
+            }
+
             System.out.print("Enter amount: ");
             String amount = input.nextLine().trim();
 
@@ -63,6 +77,10 @@ public class Transfer {
                         history.setAmount(String.valueOf("-" + depositAmount));
                         history.setType("transfer to " + toUser);
                         history.addTransac();
+                        
+                        // Also record transaction for recipient
+                        TransacHistory recipientHistory = new TransacHistory(String.valueOf(depositAmount), toUser, "transfer from " + username);
+                        recipientHistory.addTransac();
                     }
                     Auth.pause(input);
                     success = true;

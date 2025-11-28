@@ -11,5 +11,18 @@
     "address": "Jaro Plaza",
     "dob": "1999-9-11",
     "sex": "Female"
+  },
+  {
+    "id": 2,
+    "Name": "Erwan Lida",
+    "username": "ika",
+    "pin": "1111",
+    "balance": 0,
+    "phone": "09876543210",
+    "email": "lawshi@oki.com",
+    "beneficiary": "Mioni Shila",
+    "address": "IloIlo, Antique",
+    "dob": "2011-11-11",
+    "sex": "Male"
   }
 ]

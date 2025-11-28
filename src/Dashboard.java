@@ -46,6 +46,10 @@ public class Dashboard {
                         Auth.pause(input);
                         break;
                     case "6":
+                        CardManager cardManager = new CardManager(Auth.getLoggedInUsername());
+                        cardManager.showCardManagement(input);
+                        break;
+                    case "7":
                         logout = true;
                         break;
                     default:

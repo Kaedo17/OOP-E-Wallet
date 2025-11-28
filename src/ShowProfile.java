@@ -99,6 +99,20 @@ public class ShowProfile {
                         System.out.println(formatLine("Email", storedEmail));
                         System.out.println(formatLine("Address", storedAddress));
                         System.out.println(formatLine("Beneficiary", storedBenef));
+                        
+                        // Display credit card information if exists
+                        CreditCard card = CreditCard.loadFromFile(username);
+                        if (card != null) {
+                            System.out.println("╠═══════════════════════════════════════╣");
+                            System.out.println("║           CREDIT CARD INFO            ║");
+                            System.out.println("╠═══════════════════════════════════════╣");
+                            System.out.println(formatLine("Card Number", card.getCardNumber()));
+                            System.out.println(formatLine("Expiry Date", card.getExpiryDate()));
+                            System.out.println(formatLine("Credit Limit", "₱" + String.format("%.2f", card.getCreditLimit())));
+                            System.out.println(formatLine("Available Credit", "₱" + String.format("%.2f", card.getAvailableCredit())));
+                            System.out.println(formatLine("Current Balance", "₱" + String.format("%.2f", card.getCurrentBalance())));
+                        }
+                        
                         System.out.println("╠═══════════════════════════════════════╣");
 
                         // Add delete account option
@@ -202,6 +216,9 @@ public class ShowProfile {
 
             // Also remove user's transaction history
             deleteTransactionHistory(usernameToDelete);
+            
+            // Also remove user's credit card
+            deleteCreditCard(usernameToDelete);
 
         } catch (JsonIOException | IOException ex) {
             System.out.println("╔═══════════════════════════════════════╗");
@@ -239,6 +256,37 @@ public class ShowProfile {
         } catch (Exception ex) {
             // If we can't delete transaction history, just continue
             System.out.println("Note: Could not delete transaction history");
+        }
+    }
+
+    private void deleteCreditCard(String usernameToDelete) {
+        Path cardFile = Paths.get("database").resolve("creditCards.json");
+        if (!Files.exists(cardFile)) {
+            return;
+        }
+
+        try (Reader r = Files.newBufferedReader(cardFile)) {
+            JsonElement root = JsonParser.parseReader(r);
+            JsonArray cards = root.isJsonArray() ? root.getAsJsonArray() : new JsonArray();
+
+            // Remove credit card for this user
+            for (int i = cards.size() - 1; i >= 0; i--) {
+                JsonObject card = cards.get(i).getAsJsonObject();
+                if (card.has("username") && card.get("username").getAsString().equals(usernameToDelete)) {
+                    cards.remove(i);
+                    break;
+                }
+            }
+
+            // Save updated cards back to file
+            try (FileWriter writer = new FileWriter(cardFile.toFile())) {
+                new GsonBuilder()
+                        .setPrettyPrinting()
+                        .create()
+                        .toJson(cards, writer);
+            }
+        } catch (Exception ex) {
+            System.out.println("Note: Could not delete credit card");
         }
     }
 }

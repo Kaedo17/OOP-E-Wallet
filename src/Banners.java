@@ -63,7 +63,8 @@ public class Banners {
             System.out.println("║  3. Send/Transfer                     ║");
             System.out.println("║  4. Transaction History               ║");
             System.out.println("║  5. Profile                           ║");
-            System.out.println("║  6. Logout                            ║");
+            System.out.println("║  6. Credit Card Management            ║");
+            System.out.println("║  7. Logout                            ║");
             System.out.println("╚═══════════════════════════════════════╝");
         }
 
@@ -93,6 +94,15 @@ public class Banners {
         }
     }
 
+    public class CardManagementBanner extends Banner {
+        @Override
+        public void bannerShow() {
+            System.out.println("╔═══════════════════════════════════════╗");
+            System.out.println("║        CREDIT CARD MANAGEMENT         ║");
+            System.out.println("╠═══════════════════════════════════════╣");
+        }
+    }
+
     public Banner getLoginBanner() {
         return new LoginBanner();
     }
@@ -111,5 +121,9 @@ public class Banners {
 
     public Banner getTransferBanner() {
         return new TransferBanner();
+    }
+
+    public Banner getCardManagementBanner() {
+        return new CardManagementBanner();
     }
 }
