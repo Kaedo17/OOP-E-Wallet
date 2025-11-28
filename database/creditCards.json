@@ -7,5 +7,14 @@
     "creditLimit": 50000.0,
     "availableCredit": 50000.0,
     "currentBalance": 0.0
+  },
+  {
+    "username": "Rusty",
+    "cardNumber": "8489 5828 5896 7196",
+    "expiryDate": "11/28",
+    "cvv": "294",
+    "creditLimit": 50000.0,
+    "availableCredit": 50000.0,
+    "currentBalance": 0.0
   }
 ]

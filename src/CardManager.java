@@ -28,7 +28,7 @@ public class CardManager {
                 System.out.println("╠═══════════════════════════════════════╣");
                 System.out.println("║  1. Make Payment                      ║");
                 System.out.println("║  2. Make Purchase                     ║");
-                System.out.println("║  3. Generate New Card                 ║");
+                System.out.println("║  3. Disable Generate New Card         ║");
                 System.out.println("║  4. Back to Dashboard                 ║");
                 System.out.println("╚═══════════════════════════════════════╝");
             }
@@ -59,14 +59,7 @@ public class CardManager {
                     }
                     break;
                 case "4":
-                    if (card != null) {
-                        backToDashboard = true;
-                    } else {
-                        System.out.println("╔═══════════════════════════════════════╗");
-                        System.out.println("║            Invalid option!            ║");
-                        System.out.println("╚═══════════════════════════════════════╝");
-                        Auth.pause(input);
-                    }
+                    backToDashboard = true;
                     break;
                 default:
                     System.out.println("╔═══════════════════════════════════════╗");
@@ -108,74 +101,100 @@ public class CardManager {
     }
 
     private void makePayment(Scanner input, CreditCard card) {
-        Auth.clearConsole();
-        banners.new CardManagementBanner().bannerShow();
-        displayCardInfo(card);
-        System.out.println("╠═══════════════════════════════════════╣");
-        System.out.println("║              MAKE PAYMENT             ║");
-        System.out.println("╠═══════════════════════════════════════╣");
-        System.out.println("║ Enter amount to pay:                  ║");
-        System.out.println("╚═══════════════════════════════════════╝");
-        System.out.print("Amount: ₱");
-
-        try {
-            double amount = Double.parseDouble(input.nextLine().trim());
-            if (card.makePayment(amount)) {
-                card.saveToFile();
-                System.out.println("╔═══════════════════════════════════════╗");
-                System.out.println("║         Payment successful!           ║");
-                System.out.println("╚═══════════════════════════════════════╝");
-                
-                // Record transaction
-                TransacHistory history = new TransacHistory(String.valueOf(amount), username, "credit card payment");
-                history.addTransac();
-            } else {
-                System.out.println("╔═══════════════════════════════════════╗");
-                System.out.println("║    Invalid payment amount!            ║");
-                System.out.println("╚═══════════════════════════════════════╝");
-            }
-        } catch (NumberFormatException e) {
-            System.out.println("╔═══════════════════════════════════════╗");
-            System.out.println("║      Invalid amount format!           ║");
-            System.out.println("╚═══════════════════════════════════════╝");
-        }
+        boolean backToCardMenu = false;
         
-        Auth.pause(input);
+        while (!backToCardMenu) {
+            Auth.clearConsole();
+            banners.new CardManagementBanner().bannerShow();
+            displayCardInfo(card);
+            System.out.println("╠═══════════════════════════════════════╣");
+            System.out.println("║              MAKE PAYMENT             ║");
+            System.out.println("╠═══════════════════════════════════════╣");
+            System.out.println("║ Enter amount to pay ([:1] Back):      ║");
+            System.out.println("╚═══════════════════════════════════════╝");
+            System.out.print("Amount: ₱");
+
+            String amountInput = input.nextLine().trim();
+            
+            if (":1".equalsIgnoreCase(amountInput)) {
+                backToCardMenu = true;
+                continue;
+            }
+
+            try {
+                double amount = Double.parseDouble(amountInput);
+                if (card.makePayment(amount)) {
+                    card.saveToFile();
+                    System.out.println("╔═══════════════════════════════════════╗");
+                    System.out.println("║         Payment successful!           ║");
+                    System.out.println("╚═══════════════════════════════════════╝");
+                    
+                    // Record transaction
+                    TransacHistory history = new TransacHistory(String.valueOf(amount), username, "credit card payment");
+                    history.addTransac();
+                    Auth.pause(input);
+                    backToCardMenu = true;
+                } else {
+                    System.out.println("╔═══════════════════════════════════════╗");
+                    System.out.println("║        Invalid payment amount!        ║");
+                    System.out.println("╚═══════════════════════════════════════╝");
+                    Auth.pause(input);
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("╔═══════════════════════════════════════╗");
+                System.out.println("║         Invalid amount format!        ║");
+                System.out.println("╚═══════════════════════════════════════╝");
+                Auth.pause(input);
+            }
+        }
     }
 
     private void makePurchase(Scanner input, CreditCard card) {
-        Auth.clearConsole();
-        banners.new CardManagementBanner().bannerShow();
-        displayCardInfo(card);
-        System.out.println("╠═══════════════════════════════════════╣");
-        System.out.println("║              MAKE PURCHASE            ║");
-        System.out.println("╠═══════════════════════════════════════╣");
-        System.out.println("║ Enter purchase amount:                ║");
-        System.out.println("╚═══════════════════════════════════════╝");
-        System.out.print("Amount: ₱");
-
-        try {
-            double amount = Double.parseDouble(input.nextLine().trim());
-            if (card.makePurchase(amount)) {
-                card.saveToFile();
-                System.out.println("╔═══════════════════════════════════════╗");
-                System.out.println("║         Purchase successful!          ║");
-                System.out.println("╚═══════════════════════════════════════╝");
-                
-                // Record transaction
-                TransacHistory history = new TransacHistory(String.valueOf(-amount), username, "credit card purchase");
-                history.addTransac();
-            } else {
-                System.out.println("╔═══════════════════════════════════════╗");
-                System.out.println("║  Insufficient credit or invalid amount║");
-                System.out.println("╚═══════════════════════════════════════╝");
-            }
-        } catch (NumberFormatException e) {
-            System.out.println("╔═══════════════════════════════════════╗");
-            System.out.println("║      Invalid amount format!           ║");
-            System.out.println("╚═══════════════════════════════════════╝");
-        }
+        boolean backToCardMenu = false;
         
-        Auth.pause(input);
+        while (!backToCardMenu) {
+            Auth.clearConsole();
+            banners.new CardManagementBanner().bannerShow();
+            displayCardInfo(card);
+            System.out.println("╠═══════════════════════════════════════╣");
+            System.out.println("║              MAKE PURCHASE            ║");
+            System.out.println("╠═══════════════════════════════════════╣");
+            System.out.println("║ Enter purchase amount (or 'back'):    ║");
+            System.out.println("╚═══════════════════════════════════════╝");
+            System.out.print("Amount: ₱");
+
+            String amountInput = input.nextLine().trim();
+            
+            if (":1".equalsIgnoreCase(amountInput)) {
+                backToCardMenu = true;
+                continue;
+            }
+
+            try {
+                double amount = Double.parseDouble(amountInput);
+                if (card.makePurchase(amount)) {
+                    card.saveToFile();
+                    System.out.println("╔═══════════════════════════════════════╗");
+                    System.out.println("║         Purchase successful!          ║");
+                    System.out.println("╚═══════════════════════════════════════╝");
+                    
+                    // Record transaction
+                    TransacHistory history = new TransacHistory(String.valueOf(-amount), username, "credit card purchase");
+                    history.addTransac();
+                    Auth.pause(input);
+                    backToCardMenu = true;
+                } else {
+                    System.out.println("╔═══════════════════════════════════════╗");
+                    System.out.println("║ Insufficient credit or invalid amount ║");
+                    System.out.println("╚═══════════════════════════════════════╝");
+                    Auth.pause(input);
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("╔═══════════════════════════════════════╗");
+                System.out.println("║         Invalid amount format!        ║");
+                System.out.println("╚═══════════════════════════════════════╝");
+                Auth.pause(input);
+            }
+        }
     }
 }
